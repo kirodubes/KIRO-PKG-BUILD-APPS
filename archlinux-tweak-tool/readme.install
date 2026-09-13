@@ -1,6 +1,7 @@
 post_install() {
     echo -e "\n** Following distros are supported."
     echo
+    echo -e "** AcreetionOS"
     echo -e "** Arch Linux"
     echo -e "** ArchBang"
     echo -e "** Archcraft"
@@ -15,6 +16,7 @@ post_install() {
     echo -e "** Crystal Linux"
     echo -e "** EndeavourOS"
     echo -e "** Garuda"
+    echo -e "** Helwan"
     echo -e "** Kiro"
     echo -e "** Liya"
     echo -e "** LinuxHub Prime"

@@ -1,10 +1,10 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
-pkgname=archlinux-tweak-tool-gtk4
-_pkgname=archlinux-tweak-tool-gtk4
+pkgname=archlinux-tweak-tool
+_pkgname=archlinux-tweak-tool
 _destname1="/usr"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=117
+pkgver=26.09
+pkgrel=03
 pkgdesc="Arch Linux Tweak Tool or ATT"
 arch=('x86_64')
 url="https://github.com/kirodubes/${_pkgname}"
@@ -38,8 +38,9 @@ optdepends=('alacritty: terminal for install/remove operations'
             'pipewire: modern audio system (Services tab)')
 makedepends=('git')
 options=(!strip !emptydirs)
-replaces=(archlinux-tweak-tool-gtk4-git arcolinux-tweak-tool-git)
-conflicts=('archlinux-tweak-tool-gtk4-git' 'archlinux-tweak-tool-git' 'arcolinux-tweak-tool-git' 'arcolinux-tweak-tool-dev-git' 'archlinux-tweak-tool-dev-git')
+provides=('archlinux-tweak-tool-gtk4')
+replaces=(archlinux-tweak-tool-gtk4 archlinux-tweak-tool-gtk4-git arcolinux-tweak-tool-git)
+conflicts=('archlinux-tweak-tool-gtk4' 'archlinux-tweak-tool-gtk4-git' 'archlinux-tweak-tool-git' 'arcolinux-tweak-tool-git' 'arcolinux-tweak-tool-dev-git' 'archlinux-tweak-tool-dev-git')
 source=("${_pkgname}::git+${url}")
 sha256sums=('SKIP')
 install='readme.install'
