@@ -80,7 +80,7 @@ bash 3-build-all-edu-themes.sh
 
 ## Bash script standard
 
-All scripts in this repo follow the template in `~/EDU/archlinux-tweak-tool-gtk4/up.sh`:
+All scripts in this repo follow this template:
 `set -euo pipefail` → header block → `SCRIPT_DIR` → tput colors with TTY fallback → five log functions (`log_section` / `log_info` / `log_warn` / `log_error` / `log_success`) → `on_error` + trap → functions → `main()` ending with `log_success "$(basename "$0") done"` → `main "$@"`.
 
 The per-package `build-data.sh` files in subdirectories are still on the old style (bare tput calls, no `set -euo pipefail`). When editing one, migrate it to the standard template using the root `build-data.sh` as the model.
