@@ -1,5 +1,8 @@
 post_install() {
-    echo -e "\n** The files have been installed in /etc/skel/.config/kitty **\n"
+    echo -e "\n** Kiro kitty config installed to /etc/skel/.config/kitty/ **"
+    echo -e "** New users inherit it automatically. **"
+    echo -e "** To use it on your current account, copy the stub to your home: **"
+    echo -e "**   cp /etc/skel/.config/kitty/kitty.conf ~/.config/kitty/kitty.conf **\n"
 }
 
 post_upgrade() {

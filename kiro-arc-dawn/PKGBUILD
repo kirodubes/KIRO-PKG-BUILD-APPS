@@ -2,8 +2,8 @@
 pkgname=kiro-arc-dawn
 _destname1="/usr/share/themes/"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 pkgdesc="Arc themes created for edu"
 arch=('any')
 url="https://github.com/kirodubes/kiro-arc-dawn"

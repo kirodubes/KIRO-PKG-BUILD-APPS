@@ -1,8 +1,8 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 
 pkgname=plymouth-theme-kiro-logo
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 pkgdesc="Kiro Linux self-assembling logo boot splash theme for Plymouth"
 arch=('any')
 url="https://github.com/kirodubes/plymouth-theme-kiro-logo"

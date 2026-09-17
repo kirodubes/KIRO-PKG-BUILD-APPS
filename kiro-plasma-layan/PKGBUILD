@@ -1,7 +1,7 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-plasma-layan
-pkgver=26.06
-pkgrel=08
+pkgver=26.09
+pkgrel=01
 pkgdesc="Layan Plasma global theme — Layan dark (desktoptheme, look-and-feel, aurorae, color scheme, Kvantum, SDDM, Layan cursors); Tela icons"
 arch=('any')
 url="https://github.com/kirodubes/kiro-plasma-layan.git"

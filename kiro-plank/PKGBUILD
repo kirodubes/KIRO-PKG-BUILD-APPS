@@ -2,7 +2,7 @@
 pkgname=kiro-plank
 _destname1="/etc/skel/.config/plank/"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
+pkgver=26.09
 pkgrel=01
 pkgdesc="Default Plank dock configuration for Kiro"
 arch=('any')

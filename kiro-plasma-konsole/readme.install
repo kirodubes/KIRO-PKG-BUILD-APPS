@@ -1,5 +1,9 @@
 post_install() {
-    echo -e "\n** Kiro Konsole config installed to /etc/skel — new users get the Kiro profile as default. Existing users: cp -rT /etc/skel ~/ **\n"
+    echo -e "\n** Kiro Konsole config installed to /etc/skel (.config/konsolerc + .local/share/konsole/) **"
+    echo -e "** New users get the Kiro profile as default. **"
+    echo -e "** To use it on your current account, copy the stubs to your home: **"
+    echo -e "**   cp /etc/skel/.config/konsolerc ~/.config/konsolerc **"
+    echo -e "**   cp -r /etc/skel/.local/share/konsole ~/.local/share/ **\n"
 }
 
 post_upgrade() {

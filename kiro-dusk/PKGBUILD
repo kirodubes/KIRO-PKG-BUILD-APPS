@@ -1,8 +1,8 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-dusk
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.07
-pkgrel=06
+pkgver=26.09
+pkgrel=01
 pkgdesc="The dusk (dwm fork) edition of Kiro — a runtime-configured X11 tiling desktop"
 arch=('x86_64')
 url="https://github.com/kirodubes/kiro-dusk"

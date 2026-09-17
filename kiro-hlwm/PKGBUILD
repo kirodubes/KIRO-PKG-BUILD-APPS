@@ -1,8 +1,8 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-hlwm
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.07
-pkgrel=05
+pkgver=26.09
+pkgrel=01
 pkgdesc="The herbstluftwm edition of Kiro — a manual tiling X11 desktop"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hlwm"

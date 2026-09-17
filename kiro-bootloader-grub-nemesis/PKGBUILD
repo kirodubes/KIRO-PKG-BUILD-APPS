@@ -1,8 +1,8 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 
 pkgname=kiro-bootloader-grub-nemesis
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 pkgdesc="Pacman hooks that re-run grub-install + grub-mkconfig so a grub/kernel upgrade can never brick boot (BIOS disk auto-detected)"
 arch=('any')
 url="https://github.com/kirodubes/${pkgname}"

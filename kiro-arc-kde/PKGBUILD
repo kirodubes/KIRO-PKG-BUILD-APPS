@@ -2,8 +2,8 @@
 # Upstream: https://github.com/PapirusDevelopmentTeam/arc-kde
 # Kiro source (fork): https://github.com/kirodubes/kiro-arc-kde
 pkgname=kiro-arc-kde
-pkgver=26.06
-pkgrel=101
+pkgver=26.09
+pkgrel=01
 pkgdesc="Arc theme for KDE Plasma (Kiro fork, latest master from kirodubes)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-arc-kde"

@@ -1,7 +1,7 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-shells
-pkgver=26.06
-pkgrel=103
+pkgver=26.09
+pkgrel=01
 pkgdesc="Meta-package: bash, zsh and fish configuration for Kiro (pulls kiro-bash-config, kiro-zsh-config, kiro-fish-config)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-shells"

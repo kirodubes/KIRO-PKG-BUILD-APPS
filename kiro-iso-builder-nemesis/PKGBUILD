@@ -6,8 +6,8 @@ _srcname=kiro-iso-builder-nemesis
 # the production kiro-iso-builder: same /usr/bin command, /usr/share dir and .desktop.
 _pkgname=kiro-iso-builder
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=108
+pkgver=26.09
+pkgrel=02
 pkgdesc="GTK4 front-end for building the Kiro ISO, with one-click host pre-flight fixes"
 arch=('any')
 url="https://github.com/kirodubes/${_srcname}"

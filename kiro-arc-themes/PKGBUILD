@@ -58,8 +58,8 @@ pkgname=(
   kiro-arc-vampire
   kiro-arc-warm-pink
 )
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 pkgdesc="Arc recoloured GTK theme"
 arch=('any')
 url="https://github.com/kirodubes/kiro-arc-themes"

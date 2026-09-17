@@ -1,7 +1,7 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-fish-config
-pkgver=26.06
-pkgrel=05
+pkgver=26.09
+pkgrel=01
 pkgdesc="Fish shell configuration for Kiro"
 arch=('any')
 url="https://github.com/kirodubes/kiro-fish-config"

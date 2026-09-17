@@ -1,7 +1,7 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-papirus-dark-tela
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 _destname1="/usr/share/icons/"
 pkgdesc="Papirus dark icons with Tela folders"
 arch=('any')

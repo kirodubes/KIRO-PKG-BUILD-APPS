@@ -2,8 +2,8 @@
 pkgname=kiro-assistant
 _pkgname=kiro-assistant
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=03
 pkgdesc="Kiro Assistant — Claude Code knowledge pack for the Kiro distro (BYO-key)"
 arch=('any')
 url="https://github.com/kirodubes/${_pkgname}"

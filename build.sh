@@ -11,6 +11,10 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
+# A missing or private remote must fail fast: without this git falls back to an
+# interactive credential prompt and blocks the whole batch indefinitely.
+export GIT_TERMINAL_PROMPT=0
+
 #####################################################################
 # Colors
 #####################################################################

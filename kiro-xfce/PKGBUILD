@@ -3,9 +3,10 @@ pkgname=kiro-xfce
 _destname1="/etc/skel/.config/Thunar/"
 _destname2="/etc/skel/.config/xfce4/"
 _destname3="/etc/skel/.config/autostart/"
+_destname4="/usr/"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=101
+pkgver=26.09
+pkgrel=01
 pkgdesc="Desktop configuration for edu"
 arch=('any')
 url="https://github.com/kirodubes/kiro-xfce"
@@ -28,4 +29,6 @@ package() {
 	cp -r "${srcdir}/${pkgname}/${_destname2}/"* "${pkgdir}${_destname2}"
 	mkdir -p "${pkgdir}${_destname3}"
 	cp -r "${srcdir}/${pkgname}/${_destname3}/"* "${pkgdir}${_destname3}"
+	mkdir -p "${pkgdir}${_destname4}"
+	cp -r "${srcdir}/${pkgname}/${_destname4}/"* "${pkgdir}${_destname4}"
 }

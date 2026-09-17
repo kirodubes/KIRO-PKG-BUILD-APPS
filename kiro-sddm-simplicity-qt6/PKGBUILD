@@ -2,8 +2,8 @@
 pkgname=kiro-sddm-simplicity-qt6
 _destname1="/usr"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 pkgdesc="Simplicity theme from isseigx on gitlab"
 arch=('any')
 url="https://github.com/kirodubes/kiro-sddm-simplicity-qt6"

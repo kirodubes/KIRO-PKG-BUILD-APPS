@@ -1,8 +1,8 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-zsh-config
 _destname1="/etc/skel/"
-pkgver=26.06
-pkgrel=02
+pkgver=26.09
+pkgrel=01
 pkgdesc="Zsh shell configuration for Kiro"
 arch=('any')
 url="https://github.com/kirodubes/kiro-zsh-config"
@@ -11,6 +11,7 @@ makedepends=('git')
 depends=('zsh')
 provides=("${pkgname}")
 options=(!strip !emptydirs)
+install=${pkgname}.install
 source=(${pkgname}::"git+${url}.git")
 sha256sums=('SKIP')
 package() {

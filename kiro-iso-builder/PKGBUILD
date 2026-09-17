@@ -2,8 +2,8 @@
 pkgname=kiro-iso-builder
 _pkgname=kiro-iso-builder
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=106
+pkgver=26.09
+pkgrel=02
 pkgdesc="GTK4 front-end for building the Kiro ISO, with one-click host pre-flight fixes"
 arch=('any')
 url="https://github.com/kirodubes/${_pkgname}"

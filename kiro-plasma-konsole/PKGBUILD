@@ -2,8 +2,8 @@
 pkgname=kiro-plasma-konsole
 _destname="/etc"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=02
+pkgver=26.09
+pkgrel=01
 pkgdesc="Default Konsole configuration for Kiro (profile, colour scheme, konsolerc via /etc/skel)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-plasma-konsole"

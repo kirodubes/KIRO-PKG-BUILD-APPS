@@ -2,8 +2,8 @@
 pkgname=kiro-plasma-system-settings
 _destname="/etc"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=10
+pkgver=26.09
+pkgrel=01
 pkgdesc="Default KDE Plasma System Settings configuration for Kiro (ships /etc/xdg cascade defaults)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-plasma-system-settings"

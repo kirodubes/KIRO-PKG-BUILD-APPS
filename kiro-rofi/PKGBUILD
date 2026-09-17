@@ -2,8 +2,8 @@
 pkgname=kiro-rofi
 _destname1="/etc/skel/.config/rofi/"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 pkgdesc="rofi config for edu"
 arch=('any')
 url="https://github.com/kirodubes/kiro-rofi"

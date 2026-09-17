@@ -1,5 +1,5 @@
 post_install() {
-    echo -e "\n** Kiro Keybindings installed — open the cheatsheet with the keybindings menu entry or its hotkey (Super+K on ohmychadwm) **\n"
+    echo -e "\n** Kiro Keybindings installed **\n"
 }
 
 post_upgrade() {

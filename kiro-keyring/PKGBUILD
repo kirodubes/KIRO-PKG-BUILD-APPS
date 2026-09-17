@@ -1,7 +1,7 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-keyring
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 epoch=1
 pkgdesc="Kiro PGP keyring — trusts the key that signs nemesis_repo packages"
 arch=('any')

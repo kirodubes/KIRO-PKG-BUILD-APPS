@@ -1,8 +1,8 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 
 pkgname=plymouth-theme-startrek
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 pkgdesc="Star Trek Starfleet boot splash theme for Plymouth"
 arch=('any')
 url="https://github.com/erikdubois/plymouth-theme-startrek"

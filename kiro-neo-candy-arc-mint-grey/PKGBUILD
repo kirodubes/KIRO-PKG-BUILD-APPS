@@ -1,7 +1,7 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-neo-candy-arc-mint-grey
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 _destname1="/usr/share/icons/"
 pkgdesc="Beautyline icons completed for ArcoLinux + Candy icons + mint icons"
 arch=('any')

@@ -2,8 +2,8 @@
 pkgname=kiro-plasma-dolphin
 _destname="/etc"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=03
+pkgver=26.09
+pkgrel=01
 pkgdesc="Default Dolphin configuration for Kiro (ships /etc/xdg/dolphinrc cascade default)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-plasma-dolphin"

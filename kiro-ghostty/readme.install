@@ -1,5 +1,8 @@
 post_install() {
-    echo -e "\n** The files have been installed in /etc/skel/.config/ghostty **\n"
+    echo -e "\n** Kiro ghostty config installed to /etc/skel/.config/ghostty/ **"
+    echo -e "** New users inherit it automatically. **"
+    echo -e "** To use it on your current account, copy the stub to your home: **"
+    echo -e "**   cp /etc/skel/.config/ghostty/config ~/.config/ghostty/config **\n"
 }
 
 post_upgrade() {

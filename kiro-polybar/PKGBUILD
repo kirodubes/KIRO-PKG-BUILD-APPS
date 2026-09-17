@@ -2,8 +2,8 @@
 pkgname=kiro-polybar
 _destname1="/etc/skel/.config/"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=02
 pkgdesc="Polybar configuration for Kiro"
 arch=('any')
 url="https://github.com/kirodubes/kiro-polybar"

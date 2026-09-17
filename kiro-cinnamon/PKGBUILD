@@ -2,8 +2,8 @@
 pkgname=kiro-cinnamon
 _destname1="/usr"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.06
-pkgrel=100
+pkgver=26.09
+pkgrel=01
 pkgdesc="Cinnamon defaults for Kiro — sets the Kiro wallpaper as the schema default (by Erik Dubois)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-cinnamon"
