@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026.09.17
+
+### What Changed
+- **`change-version-100.sh` pinned to a hardcoded `26.06`, which turns the cutoff into a downgrade.**
+  The script exists to out-rank every installed package so a `pacman -Syu` re-pulls the whole set.
+  With `FORCE_PKGVER="26.06"` frozen in place, running it after the packages had moved on to a later
+  month would have written a *lower* `pkgver` — `26.06-100` loses to `26.09-01` because `vercmp`
+  compares `pkgver` before `pkgrel` — so `-Syu` would have refused the "cutoff" entirely. Now
+  `FORCE_PKGVER="$(date +%y.%m)"`, matching what `build.sh` already does.
+
+### Technical Details
+- `pkgrel=100` stays hardcoded on purpose: within a single `pkgver` it still out-ranks any release in
+  the repo, which is the whole point of the cutoff. Only the `pkgver` half needed to follow the clock.
+- Purpose header updated to read `pkgver=<current YY.MM>` so the docs no longer name a fixed month.
+
+### Files Modified
+- `change-version-100.sh`
+
 ## 2026.09.12
 
 ### What Changed

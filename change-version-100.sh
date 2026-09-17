@@ -9,7 +9,7 @@ set -euo pipefail
 #
 # Purpose:
 #   Pin EVERY package in this folder to a fixed version
-#   pkgver=26.06 pkgrel=100 by rewriting each PKGBUILD and recording
+#   pkgver=<current YY.MM> pkgrel=100 by rewriting each PKGBUILD and recording
 #   the result in .current-version. Does NOT build anything — run
 #   build-100.sh afterwards to build and publish the pinned set.
 #
@@ -23,7 +23,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
-FORCE_PKGVER="26.06"
+FORCE_PKGVER="$(date +%y.%m)"
 FORCE_PKGREL="100"
 
 #####################################################################
