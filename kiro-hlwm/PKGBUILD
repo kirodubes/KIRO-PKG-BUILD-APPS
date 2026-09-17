@@ -1,0 +1,66 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=kiro-hlwm
+_licensedir="/usr/share/kiro/licenses/"
+pkgver=26.07
+pkgrel=05
+pkgdesc="The herbstluftwm edition of Kiro — a manual tiling X11 desktop"
+arch=('any')
+url="https://github.com/kirodubes/kiro-hlwm"
+license=('GPL3')
+makedepends=()
+depends=(
+	# Window manager + session
+	'herbstluftwm'
+	'polybar'
+	# Kiro desktop stack
+	'alacritty'
+	'rofi'
+	'kiro-keybindings'
+	'archlinux-logout-gtk4'
+	'betterlockscreen'
+	'feh'
+	'flameshot'
+	'maim'
+	'xclip'
+	'polkit-gnome'
+	'network-manager-applet'
+	'xfce4-notifyd'
+	'pavucontrol'
+	'pamixer'
+	'playerctl'
+	'brightnessctl'
+	'numlockx'
+	'xdg-user-dirs'
+	'ttf-jetbrains-mono-nerd'
+)
+optdepends=(
+	'fastcompmgr-git: lightweight compositor (super+g toggle, autostart default)'
+	'picom: alternative compositor'
+	'pamac: package manager tray (pamac-tray)'
+	'blueberry: bluetooth tray applet (blueberry-tray)'
+	'xfce4-power-manager: battery / display power management applet'
+	'arandr: generate a ~/.screenlayout/<user>.sh monitor layout'
+	'xfce4-screenshooter: ctrl+Print interactive screenshot'
+	'thunar: file manager (super+shift+Return)'
+)
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+install='readme.install'
+source=("${pkgname}::git+${url}.git")
+sha256sums=('SKIP')
+
+package() {
+	cd "${srcdir}/${pkgname}"
+
+	# Skel config tree → /etc/skel.
+	install -dm755 "${pkgdir}/etc"
+	cp -a etc/. "${pkgdir}/etc/"
+
+	# Pristine golden copy of the shipped config (for reset/restore tooling).
+	install -dm755 "${pkgdir}/usr/share/kiro/${pkgname}"
+	cp -a etc "${pkgdir}/usr/share/kiro/${pkgname}/"
+
+	# License.
+	install -dm755 "${pkgdir}${_licensedir}${pkgname}"
+	install -m644 LICENSE "${pkgdir}${_licensedir}${pkgname}/LICENSE"
+}

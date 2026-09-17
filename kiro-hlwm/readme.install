@@ -1,0 +1,17 @@
+post_install() {
+    echo
+    echo "kiro-hlwm installed."
+    echo "  - Select the 'herbstluftwm' session in your display manager and log in."
+    echo "  - Config is seeded to ~/.config/herbstluftwm on first login and is"
+    echo "    configured at runtime in ~/.config/herbstluftwm/autostart (no compile)."
+    echo "  - Reload the config live with Super+Shift+R."
+    echo "  - Press Super+Ctrl+S for the keybindings cheatsheet."
+    echo
+}
+
+post_upgrade() {
+    echo
+    echo "kiro-hlwm upgraded. Your ~/.config/herbstluftwm is left untouched;"
+    echo "compare against /usr/share/kiro/kiro-hlwm/ for new defaults."
+    echo
+}

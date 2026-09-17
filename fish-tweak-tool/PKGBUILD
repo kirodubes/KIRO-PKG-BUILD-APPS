@@ -1,0 +1,27 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=fish-tweak-tool
+_pkgname=fish-tweak-tool
+_destname1="/usr"
+_licensedir="/usr/share/kiro/licenses/"
+pkgver=26.07
+pkgrel=02
+pkgdesc="Fish Tweak Tool — GTK4 configurator for the fish shell"
+arch=('any')
+url="https://github.com/kirodubes/${_pkgname}"
+license=('GPL3')
+depends=('fish' 'fisher' 'python-gobject' 'gtk4')
+optdepends=('alacritty: shows the exact command for each change in a terminal'
+            'starship: cross-shell prompt option'
+            'fastfetch: system-summary greeting option'
+            'tinty-git: 500+ base16/base24 terminal palettes in the Palettes tab')
+makedepends=('git')
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+source=("${_pkgname}::git+${url}.git")
+sha256sums=('SKIP')
+install='readme.install'
+package() {
+	install -dm755 "${pkgdir}${_licensedir}${_pkgname}"
+	install -m644 "${srcdir}/${_pkgname}/LICENSE" "${pkgdir}${_licensedir}${_pkgname}/LICENSE"
+	cp -r "${srcdir}/${_pkgname}/${_destname1}" "${pkgdir}"
+}

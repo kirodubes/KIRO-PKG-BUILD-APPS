@@ -1,0 +1,16 @@
+post_install() {
+    echo
+    echo "kiro-dusk installed."
+    echo "  - Select the 'dusk' session in your display manager and log in."
+    echo "  - Config is seeded to ~/.config/dusk on first login and configured"
+    echo "    at runtime in ~/.config/dusk/dusk.cfg (no recompile needed)."
+    echo "  - Press Super+Ctrl+S for the keybindings cheatsheet."
+    echo
+}
+
+post_upgrade() {
+    echo
+    echo "kiro-dusk upgraded. Your ~/.config/dusk is left untouched;"
+    echo "compare against /usr/share/kiro/kiro-dusk/ for new defaults."
+    echo
+}

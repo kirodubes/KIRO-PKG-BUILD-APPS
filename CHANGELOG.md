@@ -40,10 +40,24 @@
   still out-ranks any release in the repo, which is the whole point of the cutoff. Only the `pkgver`
   half needed to follow the clock. Purpose header updated to read `pkgver=<current YY.MM>`.
 
+- The same abort bug lived in the two other batch drivers and is fixed the same way.
+  `build-skel-hint-packages.sh` and `build-twm-xfce-plasma-hyprland-packages.sh` both ran
+  `(cd "$dir" && sh ./build.sh)` bare, and their "directory not found" / "no build.sh" skips were
+  silent — a package could vanish from the batch with nothing but a scrolled-past warning. Both now
+  record every skip and failure and print the summary at the end. In the twm script the
+  `push_sources` loop gets the same treatment: a repo that will not push no longer stops the other
+  pushes or the builds, and push failures are labelled as such in the summary.
+- **Four new packages tracked in git.** `fish-tweak-tool`, `kiro-dusk`, `kiro-hlwm` and
+  `kiro-starship` existed on disk but had never been committed, so the build-driver fix above would
+  have lived only in Erik's working copy for those four.
+
 ### Files Modified
 - `1-build-all-packages.sh`
+- `build-skel-hint-packages.sh`
+- `build-twm-xfce-plasma-hyprland-packages.sh`
 - `change-version-100.sh`
 - `*/build.sh` (75 packages; `kiro-plasma-meta` unchanged)
+- Added: `fish-tweak-tool/`, `kiro-dusk/`, `kiro-hlwm/`, `kiro-starship/`
 
 ## 2026.09.12
 
