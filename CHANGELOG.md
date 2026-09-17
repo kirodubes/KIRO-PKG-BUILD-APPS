@@ -24,8 +24,10 @@
   credential prompt** inside the chroot — so it blocked forever at zero bytes transferred rather
   than failing. 47 minutes on the first, 12 on the second, each ended only by killing the clone by
   hand. From the outside a blocked prompt is indistinguishable from a slow build. Both packages are
-  removed, and every per-package `build.sh` now exports `GIT_TERMINAL_PROMPT=0` so git fails
-  instead of asking.
+  removed, and root plus 72 per-package `build.sh` now export `GIT_TERMINAL_PROMPT=0`. That covers
+  git calls the script makes in its own shell; it most likely does **not** reach the
+  `makepkg --verifysource` clone that actually hung, which sits behind two `sudo` hops — see
+  Technical Details before assuming this hang cannot recur.
 
 ### Technical Details
 - `build.sh` (75 packages): on `success != true` the script logs the failure to `/tmp/failed` and
