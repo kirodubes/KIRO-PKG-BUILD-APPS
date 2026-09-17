@@ -90,6 +90,7 @@ build_all_packages() {
 
     mapfile -t dirs < <(find "${SCRIPT_DIR}" -maxdepth 1 -mindepth 1 -type d -not -name ".*" | sort)
     total="${#dirs[@]}"
+    TOTAL="${total}"
     count=0
 
     log_section "Building ${total} packages"
@@ -101,13 +102,33 @@ build_all_packages() {
 
         log_info "Package ${count} of ${total}: ${name}"
 
-        if compgen -G "${dir}/build*" > /dev/null 2>&1; then
-            (cd "${dir}" && sh ./build*)
-        else
+        if ! compgen -G "${dir}/build*" > /dev/null 2>&1; then
             log_warn "No build script found for ${name} — skipping"
             echo "Error: ${name} has no build script" | tee -a /tmp/failed
+            FAILED+=("${name} (no build script)")
+            continue
         fi
+
+        # One bad package must not take the batch down with it: a build script
+        # that dies (chroot sync, mirror desync, makepkg) is recorded and the
+        # loop moves on.
+        if (cd "${dir}" && bash ./build*); then
+            continue
+        fi
+
+        log_error "Build FAILED for ${name} — continuing with the rest"
+        FAILED+=("${name}")
     done
+}
+
+report_failures() {
+    if [[ "${#FAILED[@]}" -eq 0 ]]; then
+        log_success "All ${TOTAL} packages built without errors"
+        return 0
+    fi
+
+    log_error "$(printf '%s of %s package(s) did NOT build:\n%s\nFull log: /tmp/failed' \
+        "${#FAILED[@]}" "${TOTAL}" "$(printf '  - %s\n' "${FAILED[@]}")")"
 }
 
 publish_repo() {
@@ -119,8 +140,13 @@ publish_repo() {
 # Main
 #####################################################################
 main() {
+    FAILED=()
+    TOTAL=0
+    : > /tmp/failed
+
     build_all_packages
     publish_repo
+    report_failures
 
     log_success "$(basename "$0") done"
 }

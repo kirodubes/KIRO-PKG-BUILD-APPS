@@ -3,6 +3,15 @@
 ## 2026.09.17
 
 ### What Changed
+- **A failing package took the whole batch down, and a failed build reported itself as a success.**
+  Two halves of the same hole. `1-build-all-packages.sh` ran `(cd "$dir" && sh ./build*)` bare under
+  `set -euo pipefail`, so the first package whose build script died — typically `arch-nspawn ...
+  pacman -Syu`, run once per package, on a mirror desync — aborted every remaining package. And the
+  per-package `build.sh` swallowed build failures entirely: `makechrootpkg` failing left
+  `success="false"`, but the script still promoted `.current-version` → `.previous-version`, still
+  printed `Build done for <pkg>`, and still exited `0`. The only honest record of what shipped was
+  the contents of `nemesis_repo/x86_64/`. Now a failed package is recorded and the batch continues,
+  and the run ends with an explicit list of what did **not** build.
 - **`change-version-100.sh` pinned to a hardcoded `26.06`, which turns the cutoff into a downgrade.**
   The script exists to out-rank every installed package so a `pacman -Syu` re-pulls the whole set.
   With `FORCE_PKGVER="26.06"` frozen in place, running it after the packages had moved on to a later
@@ -11,12 +20,30 @@
   `FORCE_PKGVER="$(date +%y.%m)"`, matching what `build.sh` already does.
 
 ### Technical Details
-- `pkgrel=100` stays hardcoded on purpose: within a single `pkgver` it still out-ranks any release in
-  the repo, which is the whole point of the cutoff. Only the `pkgver` half needed to follow the clock.
-- Purpose header updated to read `pkgver=<current YY.MM>` so the docs no longer name a fixed month.
+- `build.sh` (75 packages): on `success != true` the script logs the failure to `/tmp/failed` and
+  exits `1`. `.previous-version` is deliberately **not** promoted on failure — it must never claim a
+  version shipped when the build produced nothing. Harmless for the next run, since `bump_version`
+  re-bumps `pkgrel` before the comparison, so `BUILD_NEEDED` would be true regardless.
+- `kiro-plasma-meta/build.sh` needed no change: it is a meta package with none of the version
+  machinery, and its `(cd /tmp/tempbuild && makepkg -df)` is already bare under `set -e`.
+- `1-build-all-packages.sh`: the per-package call is wrapped in `if ... ; then continue; fi` (a
+  failing command in an `if` condition triggers neither `set -e` nor the `ERR` trap), failures
+  accumulate in a `FAILED` array, and a new `report_failures` prints the summary after publishing.
+  `/tmp/failed` is truncated at the start of a run so it reflects that run only — a manually invoked
+  `build.sh` still appends to it.
+- `sh ./build*` → `bash ./build*`. Every build script is `#!/bin/bash` with `set -euo pipefail`,
+  `[[ ]]` and `BASH_SOURCE`; invoking them through `sh` was relying on Arch's `/bin/sh` → bash
+  symlink for no benefit.
+- Verified against stub packages: a failing package is reported, the following packages still build,
+  publishing still runs, and the summary lists both the failure and the no-build-script skip.
+- `change-version-100.sh`: `pkgrel=100` stays hardcoded on purpose — within a single `pkgver` it
+  still out-ranks any release in the repo, which is the whole point of the cutoff. Only the `pkgver`
+  half needed to follow the clock. Purpose header updated to read `pkgver=<current YY.MM>`.
 
 ### Files Modified
+- `1-build-all-packages.sh`
 - `change-version-100.sh`
+- `*/build.sh` (75 packages; `kiro-plasma-meta` unchanged)
 
 ## 2026.09.12
 

@@ -230,6 +230,15 @@ build_package() {
     log_section "Cleaning up"
     find "${SCRIPT_DIR}" -maxdepth 1 \( -name "*.log" -o -name "*.deb" -o -name "*.tar.gz" \) -delete
 
+    if [[ "${success}" != "true" ]]; then
+        # .previous-version is deliberately NOT promoted here: it must never
+        # claim a version shipped when the build produced nothing. Exit non-zero
+        # so the batch driver can record this package as failed and move on.
+        log_error "Build FAILED for ${search}"
+        echo "Error: ${search} failed to build" | tee -a /tmp/failed
+        exit 1
+    fi
+
     cp "${SCRIPT_DIR}/.current-version" "${SCRIPT_DIR}/.previous-version"
 
     log_success "Build done for ${search}"
