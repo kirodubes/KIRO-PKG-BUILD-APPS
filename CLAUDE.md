@@ -13,7 +13,7 @@ edu-pkgbuild/
 ├── 1-build-all-packages.sh       # build every subdirectory
 ├── 2-build-all-edu-packages.sh   # build edu-* subdirectories only
 ├── 3-build-all-edu-themes.sh     # build edu-neo-candy-* subdirectories only
-├── build.sh                   # root template — copy this into new packages
+├── build.sh                      # root template — copy this into new packages
 ├── setup.sh / up.sh              # git remote setup and push helpers
 └── <package-name>/
     ├── PKGBUILD

@@ -18,6 +18,14 @@
   month would have written a *lower* `pkgver` — `26.06-100` loses to `26.09-01` because `vercmp`
   compares `pkgver` before `pkgrel` — so `-Syu` would have refused the "cutoff" entirely. Now
   `FORCE_PKGVER="$(date +%y.%m)"`, matching what `build.sh` already does.
+- **Two dead GitHub remotes hung the whole batch for ~an hour, silently.**
+  `kiro-surfn-numixs-blue` and `plymouth-theme-kiro` pointed at repos that no longer exist. `git
+  clone` got `Repository not found` and, because the URL is HTTPS, fell back to an **interactive
+  credential prompt** inside the chroot — so it blocked forever at zero bytes transferred rather
+  than failing. 47 minutes on the first, 12 on the second, each ended only by killing the clone by
+  hand. From the outside a blocked prompt is indistinguishable from a slow build. Both packages are
+  removed, and every per-package `build.sh` now exports `GIT_TERMINAL_PROMPT=0` so git fails
+  instead of asking.
 
 ### Technical Details
 - `build.sh` (75 packages): on `success != true` the script logs the failure to `/tmp/failed` and
@@ -57,6 +65,27 @@
   `build.sh` — so every batch run listed them as `(no build script)`. The 3PARTY repo already
   classifies packages by their real upstream signal and syncs the AUR tree itself, which is exactly
   what they need. This repo is now 75 dirs, all 75 buildable, with an empty failure list.
+- `export GIT_TERMINAL_PROMPT=0` sits directly after `SCRIPT_DIR=` in root `build.sh` and in 72 of
+  the 73 package copies. `kiro-plasma-meta/build.sh` is deliberately excluded: its PKGBUILD has
+  `source=()` and the script contains no `git` call at all, so the export would be dead code.
+- **Honest limitation:** `makechrootpkg` is reached through two `sudo` layers, and neither
+  `--preserve-env` allowlist includes `GIT_TERMINAL_PROMPT` (the inner
+  `sudo -u erik --preserve-env=GNUPGHOME,SSH_AUTH_SOCK env ... makepkg --verifysource` is devtools'
+  own code). So the export reliably protects git calls `build.sh` makes in its *own* shell, but
+  probably does **not** reach the `--verifysource` clone that actually hung. This could not be
+  tested: `sudo -n` on this box is NOPASSWD for `dmesg` only. The guaranteed fix, if the hang
+  recurs, is a pre-flight `GIT_TERMINAL_PROMPT=0 timeout 30 git ls-remote "$url" HEAD` in
+  `build.sh`'s own shell before the `makechrootpkg` call.
+- Diagnosis method worth keeping: a hung clone shows a frozen `rchar` in `/proc/<pid>/io` across a
+  10s sample, no socket in `ss -tnp`, and `wchan` of `wait_woken` — while `git ls-remote` against
+  the same URL from a normal shell returns the real error immediately.
+- The 73 package `build.sh` copies are **not** uniform: 69 are current, `kiro-arc-kde`,
+  `kiro-assistant` and `kiro-keybindings` still lack the `git+` pkgver fix, and `kiro-plasma-meta`
+  is a separate meta-package script. Root `build.sh` is older than all of them, so
+  `copy-files-to-all-folders.sh` would currently regress every package copy if run.
+- `CLAUDE.md` documented a `build-data.sh` that does not exist — the driver is `build.sh` — and
+  claimed the package copies were "still on the old style" when they already follow the standard
+  template and are in fact ahead of root. Both corrected.
 
 ### Files Modified
 - `1-build-all-packages.sh`
@@ -64,6 +93,9 @@
 - `build-twm-xfce-plasma-hyprland-packages.sh`
 - `change-version-100.sh`
 - `*/build.sh` (75 packages; `kiro-plasma-meta` unchanged)
+- `build.sh` + `*/build.sh` (72 package copies; `kiro-plasma-meta` excluded — no git usage)
+- `CLAUDE.md`
+- Removed (dead upstream repos): `kiro-surfn-numixs-blue/`, `plymouth-theme-kiro/` — repo now 75 dirs
 - Added: `fish-tweak-tool/`, `kiro-dusk/`, `kiro-hlwm/`, `kiro-starship/`
 - Moved to KIRO-PKG-BUILD-3PARTY: `mir/`, `miracle-wm-git/`, `wasmedge/`
 
