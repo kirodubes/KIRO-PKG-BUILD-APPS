@@ -51,6 +51,13 @@
   `kiro-starship` existed on disk but had never been committed, so the build-driver fix above would
   have lived only in Erik's working copy for those four.
 
+- **`mir`, `miracle-wm-git` and `wasmedge` moved out to KIRO-PKG-BUILD-3PARTY.** All three were AUR
+  clones with their own nested `.git` pointing at `aur.archlinux.org`, carrying upstream versions
+  instead of this repo's `YY.MM` scheme, and they were the only three dirs here without a
+  `build.sh` — so every batch run listed them as `(no build script)`. The 3PARTY repo already
+  classifies packages by their real upstream signal and syncs the AUR tree itself, which is exactly
+  what they need. This repo is now 75 dirs, all 75 buildable, with an empty failure list.
+
 ### Files Modified
 - `1-build-all-packages.sh`
 - `build-skel-hint-packages.sh`
@@ -58,6 +65,7 @@
 - `change-version-100.sh`
 - `*/build.sh` (75 packages; `kiro-plasma-meta` unchanged)
 - Added: `fish-tweak-tool/`, `kiro-dusk/`, `kiro-hlwm/`, `kiro-starship/`
+- Moved to KIRO-PKG-BUILD-3PARTY: `mir/`, `miracle-wm-git/`, `wasmedge/`
 
 ## 2026.09.12
 
