@@ -27,6 +27,7 @@ post_install() {
     echo -e "** ParchLinux"
     echo -e "** PrismLinux"
     echo -e "** RebornOS"
+    echo -e "** Ryoku"
     echo -e "** StormOS"
     echo
     echo -e "**\n"

@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026.09.25
+
+### What Changed
+- `archlinux-tweak-tool/readme.install`: Ryoku added to the supported-distributions list printed on
+  install/upgrade, mirroring the startup banner and README table in the ATT source.
+
+### Technical Details
+- One `echo -e "** Ryoku"` line in `post_install()`, alphabetical between RebornOS and StormOS.
+
+### Files Modified
+- `archlinux-tweak-tool/readme.install`
+
 ## 2026.09.17
 
 ### What Changed
