@@ -16,7 +16,7 @@ depends=(
 	'alacritty'
 	'rofi'
 	'kiro-keybindings'
-	'archlinux-logout-gtk4'
+	'archlinux-logout'
 	'betterlockscreen'
 	'feh'
 	'flameshot'

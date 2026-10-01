@@ -1,11 +1,11 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
-pkgname=archlinux-logout-gtk4
-_pkgname=archlinux-logout-gtk4
+pkgname=archlinux-logout
+_pkgname=archlinux-logout
 _destname1="/usr"
 _destname2="/etc"
 _licensedir="/usr/share/arcolinux/licenses/"
 pkgver=26.09
-pkgrel=01
+pkgrel=05
 pkgdesc="Arch Linux logout"
 arch=('any')
 url="https://github.com/kirodubes/${_pkgname}"
@@ -23,8 +23,9 @@ depends=(
 makedepends=('git')
 options=(!strip !emptydirs)
 install='readme.install'
-conflicts=(archlinux-logout-gtk4-git archlinux-logout-git arcolinux-logout-git arcolinux-logout-dev-git arcolinux-betterlockscreen-git arcolinux-betterlockscreen-dev-git archlinux-logout-dev-git)
-replaces=(archlinux-logout-gtk4-git archlinux-logout-themes-git arcolinux-logout-themes-git arcolinux-logout-git arcolinux-betterlockscreen-git)
+conflicts=(archlinux-logout-gtk4 archlinux-logout-gtk4-git archlinux-logout-git arcolinux-logout-git arcolinux-logout-dev-git arcolinux-betterlockscreen-git arcolinux-betterlockscreen-dev-git archlinux-logout-dev-git)
+provides=(archlinux-logout-gtk4)
+replaces=(archlinux-logout-gtk4 archlinux-logout-gtk4-git archlinux-logout-themes-git arcolinux-logout-themes-git arcolinux-logout-git arcolinux-betterlockscreen-git)
 source=($_pkgname-${pkgver}-${pkgrel}::git+$url)
 sha256sums=('SKIP')
 package() {

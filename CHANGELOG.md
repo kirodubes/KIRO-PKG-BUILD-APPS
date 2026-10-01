@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026.10.01
+
+### archlinux-logout-gtk4 recipe renamed to archlinux-logout
+
+**What Changed.** The logout app's package and repo names carried a GTK version suffix that says nothing to users. Everything it installs was already named `archlinux-logout`, so only the package name and the references to it change. kiro-dusk, kiro-hlwm and kiro-qtile now depend on the new name.
+
+**Technical Details.** Recipe directory moved with `git mv`. PKGBUILD: `pkgname`/`_pkgname=archlinux-logout`, pkgrel 05, `archlinux-logout-gtk4` prepended to `replaces` and `conflicts` (installed systems switch on `pacman -Syu`), plus `provides=(archlinux-logout-gtk4)`: the frozen KIROTUX ISOs still list the old name. That is a deliberate exception to the DROP-GIT-SUFFIX rule. The old `archlinux-logout-gtk4` artifact stays in nemesis_repo.
+
+**Files Modified.**
+- `archlinux-logout/` (was `archlinux-logout-gtk4/`), `archlinux-logout/PKGBUILD`
+- `kiro-dusk/PKGBUILD`, `kiro-hlwm/PKGBUILD`, `kiro-qtile/PKGBUILD` (depends)
+
 ## 2026.09.25
 
 ### What Changed

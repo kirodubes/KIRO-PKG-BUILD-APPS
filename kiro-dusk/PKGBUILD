@@ -2,7 +2,7 @@
 pkgname=kiro-dusk
 _licensedir="/usr/share/kiro/licenses/"
 pkgver=26.09
-pkgrel=01
+pkgrel=02
 pkgdesc="The dusk (dwm fork) edition of Kiro — a runtime-configured X11 tiling desktop"
 arch=('x86_64')
 url="https://github.com/kirodubes/kiro-dusk"
@@ -32,7 +32,7 @@ depends=(
 	'kiro-rofi'
 	'kiro-rofi-themes'
 	'kiro-keybindings'
-	'archlinux-logout-gtk4'
+	'archlinux-logout'
 	'feh'
 	'flameshot'
 	'maim'
