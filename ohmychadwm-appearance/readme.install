@@ -1,0 +1,10 @@
+post_install() {
+    echo -e "\n** ohmychadwm Appearance installed"
+    echo -e "** Launch it from your menu or run: ohmychadwm-appearance"
+    echo -e "** One place for GTK theme, icons, cursor, font and the ohmychadwm bar theme"
+    echo -e "**\n"
+}
+
+post_upgrade() {
+    post_install
+}
