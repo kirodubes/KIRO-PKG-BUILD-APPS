@@ -7,10 +7,11 @@
 pkgname=kiro-thunar
 _srcrepo="kiro-xfce"                       # upstream GitHub repo to clone
 _destname1="/etc/skel/.config/Thunar/"     # subfolder to extract
+_destname2="/etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/"  # Thunar xfconf channels
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.09
+pkgver=26.10
 pkgrel=01
-pkgdesc="Default Thunar file manager configuration for Kiro (extracted from kiro-xfce)"
+pkgdesc="Default Thunar file manager configuration for Kiro, incl. its xfconf settings (extracted from kiro-xfce)"
 arch=('any')
 url="https://github.com/kirodubes/${_srcrepo}"
 license=('GPL3')
@@ -26,4 +27,6 @@ package() {
 	cp "${srcdir}/${_srcrepo}/"LICENSE "${pkgdir}${_licensedir}${pkgname}/LICENSE"
 	mkdir -p "${pkgdir}${_destname1}"
 	cp -r "${srcdir}/${_srcrepo}/${_destname1}/"* "${pkgdir}${_destname1}"
+	mkdir -p "${pkgdir}${_destname2}"
+	cp "${srcdir}/${_srcrepo}/${_destname2}/"{thunar.xml,thunar-volman.xml} "${pkgdir}${_destname2}"
 }

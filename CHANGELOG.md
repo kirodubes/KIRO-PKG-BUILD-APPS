@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026.10.04
+
+### kiro-thunar also ships Thunar's xfconf settings
+
+**What Changed.** `kiro-thunar` now installs `thunar.xml` and `thunar-volman.xml` next to the `Thunar/` folder.
+The KIROTUX DMS ISO swaps `kiro-xfce` for `kiro-thunar` (it runs Hyprland, not XFCE), and without these two
+files Thunar would lose its Kiro defaults: show hidden files, ISO dates, folders first, full path in the title,
+the Delete menu item, image size in the status bar, and the removable-drive behaviour.
+
+**Technical Details.** New `_destname2` for `etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/`; only the two
+Thunar channels are copied, not the rest of the XFCE xfconf set. Still extracted from the `kiro-xfce` repo, still
+`conflicts=('kiro-xfce')`, so the overlapping paths never meet on one system. `pkgver` 26.09 → 26.10, pkgrel 01.
+Checked by running `package()` against the local kiro-xfce checkout: 4 config files + LICENSE.
+
+**Files Modified.**
+- `kiro-thunar/PKGBUILD`
+
 ## 2026.10.01
 
 ### archlinux-logout-gtk4 recipe renamed to archlinux-logout
