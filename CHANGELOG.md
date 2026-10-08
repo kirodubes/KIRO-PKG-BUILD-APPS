@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026.10.08
+
+### kiro-arc-themes build copies its packages to the repo again
+
+**What Changed.** `kiro-arc-themes` is a split PKGBUILD: one build makes the 55 `kiro-arc-<colour>` packages. Its
+`build.sh` copied only files matching the folder name (`*kiro-arc-themes*pkg.tar.zst`), which none of them do, so a
+successful build published nothing ("cannot stat … already exists in destination — skipping copy"). It now copies
+every package in `/tmp/tempbuild`, which is recreated empty for each build. The 26.10-01 packages from the failed
+run were copied to nemesis_repo by hand.
+
+**Technical Details.** Only `kiro-arc-themes/build.sh` changed; it is the only split PKGBUILD here. The root
+`build.sh` that `copy-files-to-all-folders.sh` distributes is older than the per-recipe copies (it lacks the
+2026-09-17 git-source bump and failed-build exit), so running that script would roll the recipes back — including
+this fix.
+
+**Files Modified.**
+- `kiro-arc-themes/build.sh`
+
 ## 2026.10.04
 
 ### kiro-thunar also ships Thunar's xfconf settings

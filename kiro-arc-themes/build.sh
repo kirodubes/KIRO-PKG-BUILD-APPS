@@ -220,7 +220,9 @@ build_package() {
 
     if [[ "${success}" == "true" ]]; then
         log_section "Copying packages to ${destiny}"
-        cp -nv /tmp/tempbuild/*"${search}"*pkg.tar.zst "${destiny}" || \
+        # Split PKGBUILD: the packages are named kiro-arc-<colour>, not after this folder,
+        # so copy everything /tmp/tempbuild produced (it is recreated empty for every build).
+        cp -nv /tmp/tempbuild/*.pkg.tar.zst "${destiny}" || \
             log_warn "${search} already exists in destination — skipping copy"
 
         local file_count
