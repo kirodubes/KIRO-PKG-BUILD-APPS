@@ -12,11 +12,22 @@ run were copied to nemesis_repo by hand.
 
 **Technical Details.** Only `kiro-arc-themes/build.sh` changed; it is the only split PKGBUILD here. The root
 `build.sh` that `copy-files-to-all-folders.sh` distributes is older than the per-recipe copies (it lacks the
-2026-09-17 git-source bump and failed-build exit), so running that script would roll the recipes back — including
-this fix.
+2026-09-17 git-source bump and failed-build exit), so running that script would roll the recipes back.
+
+### Folders can opt out of copy-files-to-all-folders.sh
+
+**What Changed.** `copy-files-to-all-folders.sh` overwrote `build.sh` (or `setup.sh` / `up.sh`) in every folder.
+A folder that holds a `.custom-<file>` marker now keeps its own copy, and the script prints the marker's first line
+as the reason. `kiro-arc-themes/.custom-build.sh` protects the split-package `build.sh` above.
+
+**Technical Details.** One check in `copy_script()` before the `cp`. Skipped folders are not counted as copies. The marker holds bash comments (the pre-commit hook syntax-checks every `*.sh`); its first line, minus `# `, is printed as the reason.
+marker is a dot-file, so `build.sh`'s `cp -r "${SCRIPT_DIR}/"*` never carries it into a build. Tested on a throwaway
+tree: the unmarked folder got the root file, the marked one kept its own.
 
 **Files Modified.**
 - `kiro-arc-themes/build.sh`
+- `kiro-arc-themes/.custom-build.sh` (new)
+- `copy-files-to-all-folders.sh`
 
 ## 2026.10.04
 

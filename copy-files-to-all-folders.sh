@@ -101,6 +101,11 @@ copy_script() {
     log_section "Copying ${filename} to all subdirectories"
 
     while IFS= read -r -d '' dir; do
+        # A folder with a .custom-<file> marker keeps its own copy; the marker says why.
+        if [[ -f "${dir}/.custom-${filename}" ]]; then
+            log_warn "Skipping $(basename "${dir}")/${filename} — custom: $(head -n1 "${dir}/.custom-${filename}" | sed "s/^# *//")"
+            continue
+        fi
         cp -v "${source}" "${dir}/${filename}"
         count=$(( count + 1 ))
     done < <(find "${SCRIPT_DIR}" -mindepth 1 -maxdepth 1 -type d -not -name '.*' -print0 | sort -z)
