@@ -2,7 +2,7 @@
 pkgname=kiro-niri-dms
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=04
+pkgrel=06
 pkgdesc="niri desktop edition for Kiro (niri + DankMaterialShell, scrollable-tiling Wayland)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-niri-dms"
@@ -11,7 +11,7 @@ license=('GPL3')
 # ships its own config folder (~/.config/kiro-niri-dms/ vs kiro-niri/ vs
 # kiro-ohmyniri/), session entry, wrapper and hook — no shared files — so all
 # can be installed and picked per-login.
-depends=('niri' 'dms-shell' 'kiro-wayland-dotfiles'
+depends=('niri>=26.04' 'dms-shell' 'kiro-wayland-dotfiles'
          'kiro-keybindings'
          'matugen' 'cava' 'kimageformats'
          'xdg-desktop-portal-gtk'
