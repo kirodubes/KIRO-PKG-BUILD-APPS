@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026.10.10
+
+### Kiro Wayland recipes moved here from KIROTUX-PKG-BUILD
+
+**What Changed.** The recipes of the 17 Wayland packages that ATT installs now live here, next to the X11 ones:
+`hyprland-tweak-tool`, `kiro-dwl`, `kiro-hyprland`, `kiro-hyprland-dms`, `kiro-hyprland-noctalia`,
+`kiro-hyprland-noctura`, `kiro-labwc`, `kiro-mango`, `kiro-niri-dms`, `kiro-niri-noctalia`, `kiro-ohmyniri`,
+`kiro-river`, `kiro-scroll`, `kiro-sway`, `kiro-wayfire`, `kiro-wayland-dotfiles` and `kiro-noctalia`. They are
+Kiro packages in nemesis_repo, not KiroTux-only, and their source repos moved from `~/KIROTUX` to `~/KIRO`.
+
+**Technical Details.** The recipes are unchanged: they clone from GitHub and publish to nemesis_repo. The flows
+(`flows.manifest`, the generated `flow-kiro-*`, `flow-htt`, `flow-kiro-wayland-all`, `flow-kirotux-hyprland`,
+`flow-kirotux-wayland`) point at `~/KIRO` and `~/KIRO-PKG-BUILD-APPS`.
+
 ## 2026.10.08
 
 ### kiro-arc-themes build copies its packages to the repo again

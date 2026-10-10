@@ -1,0 +1,46 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=kiro-wayland-dotfiles
+_licensedir="/usr/share/kiro/licenses"
+pkgver=26.10
+pkgrel=03
+pkgdesc="Shared config base + helpers for the Kiro Wayland editions (dconf, mako, hyprlock/hypridle, waybar style, kiro-screenshot)"
+arch=('any')
+url="https://github.com/kirodubes/kiro-wayland-dotfiles"
+license=('GPL3')
+# The binaries it configures. NOT waybar — so dwl (dwlb, no waybar) can depend on
+# this for mako/hypr without pulling waybar; the waybar editions list waybar themselves.
+# 'dconf' is required so the post_install scriptlet can compile the shipped dconf defaults.
+# grim/slurp/wl-clipboard/libnotify are what /usr/bin/kiro-screenshot actually runs; the
+# editions list grim themselves too, but the package shipping the script owns its runtime deps.
+depends=('mako' 'hyprlock' 'hypridle' 'dconf'
+         'grim' 'slurp' 'wl-clipboard' 'libnotify')
+makedepends=('git')
+options=(!strip !emptydirs)
+install="${pkgname}.install"
+source=("${pkgname}::git+${url}")
+sha256sums=('SKIP')
+
+package() {
+	local _src="${srcdir}/${pkgname}"
+
+	# Ship the shared skel tree (mako/, hypr/, waybar/ colours + style).
+	cp -a "${_src}/etc" "${pkgdir}/"
+
+	# Shared screenshot helper. Every non-niri Wayland edition binds Print to this
+	# instead of carrying its own `grim … | wl-copy` line — that line was clipboard-only
+	# (no file, no notification) and had been copy-pasted into twelve editions.
+	install -Dm755 "${_src}/usr/bin/kiro-screenshot" "${pkgdir}/usr/bin/kiro-screenshot"
+
+	# Session-start helper: KvGnomeDark as the Qt (Kvantum) default unless the user picked an
+	# installed theme. A skel kvantum.kvconfig would clash with kiro-kvantum, so no file ships.
+	install -Dm755 "${_src}/usr/bin/kiro-kvantum-default" "${pkgdir}/usr/bin/kiro-kvantum-default"
+
+	# Pristine golden copy at a stable path.
+	install -dm755 "${pkgdir}/usr/share/kiro/kiro-wayland-dotfiles"
+	cp -a "${_src}/etc/skel/.config/." "${pkgdir}/usr/share/kiro/kiro-wayland-dotfiles/"
+
+	if [[ -f "${_src}/LICENSE" ]]; then
+		install -dm755 "${pkgdir}${_licensedir}/${pkgname}"
+		install -m644 "${_src}/LICENSE" "${pkgdir}${_licensedir}/${pkgname}/"
+	fi
+}

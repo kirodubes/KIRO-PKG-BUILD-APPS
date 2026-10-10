@@ -1,0 +1,113 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+#
+# kiro-dwl — the FIRST KIROTUX edition that BUILDS A BINARY (not a skel package).
+# dwl is suckless: config is compiled in. This recipe clones dwl + dwlb, applies
+# Kiro's patches + config.h, compiles both, and ships them + a thin skel layer.
+#
+# ⚠ FIRST-BUILD ALIGNMENT GATE (inherent to suckless packaging — confirm these):
+#   - _dwlver must be a real dwl release tag whose source matches the vendored
+#     patches/ipc.patch + patches/vanitygaps.patch AND the wlroots we ship.
+#   - dwl's config.mk pins a wlroots-0.NN via pkg-config (the version is in the
+#     MODULE NAME, e.g. `wlroots-0.18.pc`), so only the exactly-matching
+#     wlroots0.NN package can satisfy it — a newer one never will.
+#
+# ⚠ wlroots0.18 NO LONGER COMES FROM [extra] (2026-09-05). Arch dropped both
+#   wlroots0.18 and wlroots0.19; [extra] now ships only wlroots0.20, and upstream
+#   dwl — including the main branch — still pins wlroots-0.19. So no dwl release
+#   builds against what Arch ships. Kiro therefore packages wlroots0.18 itself
+#   from the AUR: KIRO-PKG-BUILD-3PARTY/wlroots0.18 → nemesis_repo (same pattern
+#   as scenefx0.5 / sway-scroll). BUILD THAT FIRST or this recipe fails to find
+#   its makedepend. Revisit when dwl migrates to wlroots 0.20: then bump _dwlver,
+#   re-point the dep, and rebase the vendored patches (they do NOT apply to 0.8).
+pkgname=kiro-dwl
+_licensedir="/usr/share/kiro/licenses"
+pkgver=26.10
+pkgrel=01
+_dwlver=0.7                       # dwl release tag to build  (ALIGN — see gate above)
+pkgdesc="dwl desktop edition for Kiro (patched dwl + dwlb, suckless dwm-for-Wayland)"
+arch=('x86_64')                   # compiles native binaries (not 'any')
+url="https://github.com/kirodubes/kiro-dwl"
+license=('GPL3')
+depends=('wlroots0.18' 'bemenu' 'bemenu-wayland' 'variety' 'kiro-variety-config'
+         'swaybg'
+         'hyprpicker' 'kiro-wayland-dotfiles'
+         'kiro-keybindings'
+         'xdg-desktop-portal-wlr' 'xdg-desktop-portal-gtk'
+         'xdg-user-dirs' 'grim' 'slurp' 'wl-clipboard' 'wlr-randr'
+         'polkit-gnome' 'network-manager-applet'
+         'pavucontrol' 'playerctl' 'wireplumber' 'brightnessctl'
+         'pixman' 'fcft' 'xorg-xwayland' 'dconf')
+makedepends=('git' 'wlroots0.18' 'wayland' 'wayland-protocols' 'libinput'
+             'libxkbcommon' 'pixman' 'fcft' 'tllist' 'pkgconf' 'libdrm')
+optdepends=('betterlockscreen: blurred lock-screen image cache (Ctrl+Alt+R)'
+            'someblocks: dwmblocks-style status feed (alt to status.sh)'
+            'wlogout: graphical logout / power menu')
+options=(!strip !emptydirs)
+source=("${pkgname}::git+${url}"
+        "dwl-${_dwlver}.tar.gz::https://codeberg.org/dwl/dwl/archive/v${_dwlver}.tar.gz"
+        "git+https://github.com/kolunmi/dwlb.git")
+sha256sums=('SKIP' 'SKIP' 'SKIP')
+
+prepare() {
+	local _k="${srcdir}/${pkgname}"
+
+	# ── dwl: apply Kiro patches + drop the baked config.h ──
+	cd "${srcdir}/dwl"
+	# vanitygaps is version-matched to _dwlver and must apply.
+	patch -p1 < "${_k}/patches/vanitygaps.patch"
+	# The ipc patch (dwl-ipc-unstable-v2) is version-sensitive — apply it ONLY if
+	# it applies cleanly to this _dwlver; otherwise build without ipc and tell
+	# dwlb to run in non-ipc (stdin) mode, so the build always succeeds.
+	local _ipc=false
+	if patch -p1 --dry-run < "${_k}/patches/ipc.patch" >/dev/null 2>&1; then
+		patch -p1 < "${_k}/patches/ipc.patch"
+		_ipc=true
+		echo "kiro-dwl: ipc patch applied — dwlb will use ipc (clickable tags)."
+	else
+		echo "kiro-dwl: WARNING — ipc patch does NOT apply to dwl ${_dwlver}; building"
+		echo "kiro-dwl: WITHOUT ipc. dwlb runs in stdin mode (status text, no live tags)."
+		echo "kiro-dwl: To restore clickable tags, vendor a ${_dwlver}-matching ipc patch."
+	fi
+	cp -f "${_k}/config.h" config.h
+
+	# ── dwlb: drop the Kiro config, matching its ipc flag to dwl's actual support ──
+	cd "${srcdir}/dwlb"
+	cp -f "${_k}/dwlb-config.def.h" config.def.h
+	sed -i "s/^static bool ipc = .*/static bool ipc = ${_ipc};/" config.def.h
+}
+
+build() {
+	# vanitygaps adds fine-grained gap functions (incigaps/incohgaps/…) that Kiro's
+	# config.h does not all bind; dwl builds with -Werror, so the resulting
+	# "-Wunused-function" warnings would fail the build. Disable just that warning
+	# (appended last, so it wins over the Makefile's -Werror); real error-checks stay.
+	make -C "${srcdir}/dwl" CFLAGS="${CFLAGS:-} -Wno-unused-function"
+	make -C "${srcdir}/dwlb"
+}
+
+package() {
+	local _k="${srcdir}/${pkgname}"
+
+	# Binaries
+	install -Dm755 "${srcdir}/dwl/dwl"   "${pkgdir}/usr/bin/dwl"
+	install -Dm755 "${srcdir}/dwlb/dwlb" "${pkgdir}/usr/bin/dwlb"
+	install -Dm755 "${_k}/bin/kiro-dwl-session" "${pkgdir}/usr/bin/kiro-dwl-session"
+
+	# Wayland session entry (greeter picks it up)
+	install -Dm644 "${_k}/usr/share/wayland-sessions/dwl.desktop" \
+		"${pkgdir}/usr/share/wayland-sessions/dwl.desktop"
+
+	# Skel runtime layer (autostart, status, mako, hypr lock, wallpaper, config.h, scripts)
+	cp -a "${_k}/etc" "${pkgdir}/"
+
+	# Golden copy: pristine config + the PATCHED dwl source, so kiro-dwl-rebuild
+	# can recompile from the user's edited ~/.config/dwl/config.h.
+	install -dm755 "${pkgdir}/usr/share/kiro/kiro-dwl"
+	cp -a "${_k}/etc/skel/.config/." "${pkgdir}/usr/share/kiro/kiro-dwl/"
+	cp -a "${srcdir}/dwl" "${pkgdir}/usr/share/kiro/kiro-dwl/dwl-src"
+
+	if [[ -f "${_k}/LICENSE" ]]; then
+		install -dm755 "${pkgdir}${_licensedir}/${pkgname}"
+		install -m644 "${_k}/LICENSE" "${pkgdir}${_licensedir}/${pkgname}/"
+	fi
+}

@@ -1,0 +1,40 @@
+_update_dconf() {
+    if command -v dconf >/dev/null 2>&1; then
+        dconf update || true
+    fi
+}
+
+_hide_upstream_niri() {
+    # niri is usually already installed when kiro-niri lands, so the pacman hook
+    # (which only fires when niri.desktop is in the transaction) will not run —
+    # apply the hide directly here.
+    /usr/bin/kiro-niri-noctalia-hide-upstream-session || true
+}
+
+_unhide_upstream_niri() {
+    # Only un-hide upstream "Niri" if NO sibling Kiro niri edition remains — every
+    # kiro-*niri* edition wants it hidden. Our own session file is already gone at
+    # post_remove, so any match here is another edition still installed. The glob
+    # covers all present and future niri editions, so none need editing this file.
+    for _s in /usr/share/wayland-sessions/kiro-*niri*.desktop; do
+        [ -e "$_s" ] && return 0
+    done
+    desktop=/usr/share/wayland-sessions/niri.desktop
+    [ -f "$desktop" ] && sed -i '/^NoDisplay=true$/d' "$desktop"
+    return 0
+}
+
+post_install() {
+    _update_dconf
+    _hide_upstream_niri
+}
+
+post_upgrade() {
+    _update_dconf
+    _hide_upstream_niri
+}
+
+post_remove() {
+    _update_dconf
+    _unhide_upstream_niri
+}

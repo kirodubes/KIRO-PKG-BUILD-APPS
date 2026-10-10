@@ -1,0 +1,74 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=kiro-hyprland-dms
+_licensedir="/usr/share/kiro/licenses"
+pkgver=26.10
+pkgrel=15
+pkgdesc="Hyprland desktop edition for Kiro (Hyprland + DankMaterialShell)"
+arch=('any')
+url="https://github.com/kirodubes/kiro-hyprland-dms"
+license=('GPL3')
+# No FILE conflict with the sibling Hyprland editions: each ships its own config
+# folder (~/.config/kiro-hyprland-dms/ vs kiro-hyprland/), session entry, wrapper
+# and hook, so kiro-hyprland-dms + the classic kiro-hyprland coexist and are picked
+# per-login. BUT it cannot coexist with the noctalia editions (kiro-hyprland-noctalia,
+# kiro-niri-noctalia, kiro-hyprland-noctura): those pull `noctalia-shell` → `noctalia-qs`,
+# noctalia's own pinned Quickshell fork that `Provides`+`Conflicts` `quickshell`. DMS 1.5.0
+# needs the modern upstream `quickshell` (the FileBrowserModal `parentWindow` property is
+# absent in noctalia-qs 0.0.12 → the DMS shell silently fails to render). `quickshell` is
+# listed explicitly AND we `conflicts=('noctalia-qs')` so pacman refuses the incompatible
+# mix at install time instead of shipping a black shell. (Diagnosed on picard 2026-07-09.)
+depends=('hyprland' 'uwsm' 'hyprpicker' 'dms-shell' 'quickshell' 'kiro-wayland-dotfiles'
+         'kiro-keybindings'
+         'matugen' 'cava' 'kimageformats'
+         'xdg-desktop-portal-hyprland'
+         'xdg-user-dirs' 'wl-clipboard' 'grim' 'slurp'
+         'pavucontrol' 'playerctl' 'wireplumber' 'brightnessctl'
+         'polkit' 'dconf')
+# noctalia-qs (noctalia's Quickshell fork) is too old for DMS 1.5.0 and Conflicts the real
+# quickshell DMS needs — make the incompatibility explicit so it fails loudly, not silently.
+conflicts=('noctalia-qs')
+optdepends=('power-profiles-daemon: power profile control via DMS (dms ipc call powerprofile)'
+            'cliphist: persistent clipboard history'
+            'cups-pk-helper: printing authentication agent'
+            'hyprsunset: blue-light filter / night mode'
+            'xdg-desktop-portal-gnome: screencasting support (pulls GNOME deps incl. nautilus)')
+makedepends=('git')
+install="${pkgname}.install"
+options=(!strip !emptydirs)
+source=("${pkgname}::git+${url}")
+sha256sums=('SKIP')
+
+package() {
+	local _src="${srcdir}/${pkgname}"
+
+	# Ship the whole skel tree (kiro-hyprland-dms/, the wallpaper, scripts).
+	# System-wide dconf appearance defaults come from kiro-wayland-dotfiles, not
+	# this package; DMS themes its own bar + GTK apps from the wallpaper via
+	# matugen at runtime.
+	cp -a "${_src}/etc" "${pkgdir}/"
+
+	# Own session entry: a wrapper starts Hyprland under uwsm pointed at this
+	# edition's own config folder (~/.config/kiro-hyprland-dms/ via --config) and
+	# ships as "Kiro Hyprland Dms" — so switching editions never inherits a
+	# sibling's stale ~/.config/hypr/. The hook + helper stamp NoDisplay=true on
+	# upstream's plain "Hyprland" entries so only the Kiro entries are offered; the
+	# .install applies it on first install, the hook re-applies after upgrades.
+	install -Dm755 "${_src}/usr/bin/kiro-hyprland-dms-session" \
+		"${pkgdir}/usr/bin/kiro-hyprland-dms-session"
+	install -Dm644 "${_src}/usr/share/wayland-sessions/kiro-hyprland-dms.desktop" \
+		"${pkgdir}/usr/share/wayland-sessions/kiro-hyprland-dms.desktop"
+	install -Dm755 "${_src}/usr/bin/kiro-hyprland-dms-hide-upstream-session" \
+		"${pkgdir}/usr/bin/kiro-hyprland-dms-hide-upstream-session"
+	install -Dm644 "${_src}/usr/share/libalpm/hooks/kiro-hyprland-dms-hide-upstream-session.hook" \
+		"${pkgdir}/usr/share/libalpm/hooks/kiro-hyprland-dms-hide-upstream-session.hook"
+
+	# Pristine, read-only golden copy of the desktop config at a stable path so
+	# the config can be reset back to Kiro Hyprland (DMS) after a user experiments.
+	install -dm755 "${pkgdir}/usr/share/kiro/kiro-hyprland-dms"
+	cp -a "${_src}/etc/skel/.config/." "${pkgdir}/usr/share/kiro/kiro-hyprland-dms/"
+
+	if [[ -f "${_src}/LICENSE" ]]; then
+		install -dm755 "${pkgdir}${_licensedir}/${pkgname}"
+		install -m644 "${_src}/LICENSE" "${pkgdir}${_licensedir}/${pkgname}/"
+	fi
+}

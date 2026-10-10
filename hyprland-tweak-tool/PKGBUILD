@@ -1,0 +1,29 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+# KIROTUX — builds in a clean chroot like the rest of the ecosystem.
+# Source is the public GitHub repo; makechrootpkg clones it on the host and copies
+# it into the chroot, so an isolated build sees it without a host-path hack.
+pkgname=hyprland-tweak-tool
+_licensedir="/usr/share/kiro/licenses"
+pkgver=26.07
+pkgrel=02
+pkgdesc="Hyprland Tweak Tool — GTK4 configuration tool for the KIROTUX Hyprland edition"
+arch=('any')
+url="https://github.com/kirodubes/hyprland-tweak-tool"
+license=('GPL3')
+depends=('python-gobject' 'gtk4' 'hyprland')
+options=(!strip !emptydirs)
+install=readme.install
+source=("${pkgname}::git+https://github.com/kirodubes/hyprland-tweak-tool.git")
+sha256sums=('SKIP')
+
+package() {
+	# Ship the app tree (usr/bin launcher, usr/share/applications desktop entry,
+	# usr/share/hyprland-tweak-tool python sources).
+	# cp -a preserves modes and includes hidden entries.
+	cp -a "${srcdir}/${pkgname}/usr" "${pkgdir}/"
+
+	if [[ -f "${srcdir}/${pkgname}/LICENSE" ]]; then
+		install -dm755 "${pkgdir}${_licensedir}/${pkgname}"
+		install -m644 "${srcdir}/${pkgname}/LICENSE" "${pkgdir}${_licensedir}/${pkgname}/"
+	fi
+}

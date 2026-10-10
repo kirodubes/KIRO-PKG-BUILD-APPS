@@ -1,0 +1,65 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=kiro-niri-noctalia
+_licensedir="/usr/share/kiro/licenses"
+pkgver=26.10
+pkgrel=01
+pkgdesc="niri desktop edition for Kiro (niri + noctalia-shell, scrollable-tiling Wayland)"
+arch=('any')
+url="https://github.com/kirodubes/kiro-niri"
+license=('GPL3')
+# No conflict with the sibling niri editions (kiro-ohmyniri, kiro-niri-mds): each
+# ships its own config folder (~/.config/kiro-niri-noctalia/ vs kiro-ohmyniri/ vs
+# kiro-niri-mds/), session entry, wrapper and hook — no shared files — so all can
+# be installed and picked per-login.
+depends=('niri' 'noctalia-shell' 'kiro-noctalia' 'kiro-wayland-dotfiles'
+         'kiro-keybindings'
+         'xdg-desktop-portal-gtk'
+         'xdg-user-dirs' 'wl-clipboard' 'grim' 'slurp'
+         'pavucontrol' 'playerctl' 'wireplumber' 'brightnessctl'
+         'polkit' 'dconf'
+         'xwayland-satellite')
+optdepends=('cliphist: clipboard history for noctalia'
+            'wlsunset: night-light / blue-light filter'
+            'power-profiles-daemon: power profile management'
+            'xdg-desktop-portal-gnome: screencasting support (pulls GNOME deps incl. nautilus)')
+makedepends=('git')
+replaces=('kiro-niri')
+install="${pkgname}.install"
+options=(!strip !emptydirs)
+source=("${pkgname}::git+${url}")
+sha256sums=('SKIP')
+
+package() {
+	local _src="${srcdir}/${pkgname}"
+
+	# Ship this edition's skel tree (kiro-niri-noctalia/ + wallpaper). The shared
+	# ~/.config/noctalia/ config comes from kiro-noctalia (a dependency), not from
+	# here — noctalia reads that fixed path, so one owner avoids the file conflict
+	# between editions. System-wide dconf appearance defaults come from
+	# kiro-wayland-dotfiles, not this package.
+	cp -a "${_src}/etc" "${pkgdir}/"
+
+	# Own session entry: a wrapper points niri at this edition's own config folder
+	# (~/.config/kiro-niri-noctalia/ via NIRI_CONFIG) and ships as "Kiro Niri Noctalia" — so switching
+	# editions never inherits a sibling's stale ~/.config/niri/. The hook + helper
+	# stamp NoDisplay=true on upstream's plain "Niri" entry (which would read the now
+	# unused ~/.config/niri/) so only "Kiro Niri Noctalia" is offered; the .install applies it
+	# on first install, the hook re-applies after niri upgrades.
+	install -Dm755 "${_src}/usr/bin/kiro-niri-noctalia-session" "${pkgdir}/usr/bin/kiro-niri-noctalia-session"
+	install -Dm644 "${_src}/usr/share/wayland-sessions/kiro-niri-noctalia.desktop" \
+		"${pkgdir}/usr/share/wayland-sessions/kiro-niri-noctalia.desktop"
+	install -Dm755 "${_src}/usr/bin/kiro-niri-noctalia-hide-upstream-session" \
+		"${pkgdir}/usr/bin/kiro-niri-noctalia-hide-upstream-session"
+	install -Dm644 "${_src}/usr/share/libalpm/hooks/kiro-niri-noctalia-hide-upstream-session.hook" \
+		"${pkgdir}/usr/share/libalpm/hooks/kiro-niri-noctalia-hide-upstream-session.hook"
+
+	# Pristine, read-only golden copy of the desktop config at a stable path so
+	# the config can be reset back to Kiro niri after a user experiments.
+	install -dm755 "${pkgdir}/usr/share/kiro/kiro-niri-noctalia"
+	cp -a "${_src}/etc/skel/.config/." "${pkgdir}/usr/share/kiro/kiro-niri-noctalia/"
+
+	if [[ -f "${_src}/LICENSE" ]]; then
+		install -dm755 "${pkgdir}${_licensedir}/${pkgname}"
+		install -m644 "${_src}/LICENSE" "${pkgdir}${_licensedir}/${pkgname}/"
+	fi
+}

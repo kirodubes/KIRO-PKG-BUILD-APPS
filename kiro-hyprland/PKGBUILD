@@ -1,0 +1,43 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=kiro-hyprland
+_licensedir="/usr/share/kiro/licenses"
+pkgver=26.10
+pkgrel=02
+pkgdesc="Hyprland desktop rice for Kiro (hypr, waybar, mako, wallpaper)"
+arch=('any')
+url="https://github.com/kirodubes/kiro-hyprland"
+license=('GPL3')
+depends=('hyprland' 'uwsm' 'hyprpicker' 'kiro-wayland-dotfiles' 'variety' 'kiro-variety-config'
+         'waybar' 'swaybg' 'rofi'
+         'hyprland-tweak-tool' 'kiro-keybindings' 'xdg-desktop-portal-hyprland'
+         'grim' 'slurp' 'wl-clipboard'
+         'polkit-gnome' 'network-manager-applet'
+         'pavucontrol' 'playerctl' 'wireplumber' 'brightnessctl'
+         'dconf')
+optdepends=('cliphist: clipboard history manager'
+            'wlogout: graphical logout / power menu'
+            'hyprsunset: blue-light filter / night mode')
+makedepends=('git')
+options=(!strip !emptydirs)
+source=("${pkgname}::git+${url}")
+sha256sums=('SKIP')
+
+package() {
+	local _src="${srcdir}/${pkgname}"
+
+	# Ship the whole skel tree (hypr/, waybar/, mako/, the wallpaper, …).
+	# cp -a preserves modes and includes hidden entries.
+	cp -a "${_src}/etc" "${pkgdir}/"
+	cp -a "${_src}/usr" "${pkgdir}/"
+
+	# Pristine, read-only golden copy of the desktop config at a stable path, so
+	# hyprland-tweak-tool can reset a user back to Kiro Hyprland (remove their
+	# config dirs, rewrite ours) after they try another community setup.
+	install -dm755 "${pkgdir}/usr/share/kiro/kiro-hyprland"
+	cp -a "${_src}/etc/skel/.config/." "${pkgdir}/usr/share/kiro/kiro-hyprland/"
+
+	if [[ -f "${_src}/LICENSE" ]]; then
+		install -dm755 "${pkgdir}${_licensedir}/${pkgname}"
+		install -m644 "${_src}/LICENSE" "${pkgdir}${_licensedir}/${pkgname}/"
+	fi
+}

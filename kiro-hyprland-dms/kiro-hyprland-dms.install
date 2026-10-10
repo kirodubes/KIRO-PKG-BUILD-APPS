@@ -1,0 +1,43 @@
+_update_dconf() {
+    if command -v dconf >/dev/null 2>&1; then
+        dconf update || true
+    fi
+}
+
+_hide_upstream_hyprland() {
+    # hyprland is usually already installed when kiro-hyprland-dms lands, so the
+    # pacman hook (which only fires when hyprland*.desktop is in the transaction)
+    # will not run — apply the hide directly here.
+    /usr/bin/kiro-hyprland-dms-hide-upstream-session || true
+}
+
+_unhide_upstream_hyprland() {
+    # Only un-hide upstream "Hyprland" if NO sibling Kiro Hyprland edition remains —
+    # every kiro-*hyprland* edition wants it hidden. Our own session file is already
+    # gone at post_remove, so any match here is another edition still installed.
+    for _s in /usr/share/wayland-sessions/kiro-*hyprland*.desktop; do
+        [ -e "$_s" ] && return 0
+    done
+    for desktop in \
+        /usr/share/wayland-sessions/hyprland.desktop \
+        /usr/share/wayland-sessions/hyprland-uwsm.desktop
+    do
+        [ -f "$desktop" ] && sed -i '/^NoDisplay=true$/d' "$desktop"
+    done
+    return 0
+}
+
+post_install() {
+    _update_dconf
+    _hide_upstream_hyprland
+}
+
+post_upgrade() {
+    _update_dconf
+    _hide_upstream_hyprland
+}
+
+post_remove() {
+    _update_dconf
+    _unhide_upstream_hyprland
+}

@@ -1,0 +1,36 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=kiro-noctalia
+_licensedir="/usr/share/kiro/licenses"
+pkgver=26.10
+pkgrel=01
+pkgdesc="Shared noctalia-shell default config for the Kiro Wayland line (~/.config/noctalia)"
+arch=('any')
+url="https://github.com/kirodubes/kiro-noctalia"
+license=('GPL3')
+# Single owner of /etc/skel/.config/noctalia/. Every kiro-<wm>-noctalia edition
+# depends on this instead of shipping its own copy — noctalia always reads the
+# fixed ~/.config/noctalia/ path, so the config cannot be namespaced per
+# compositor and must come from one package to avoid a file conflict.
+depends=('noctalia-shell')
+makedepends=('git')
+options=(!strip !emptydirs)
+source=("${pkgname}::git+${url}")
+sha256sums=('SKIP')
+
+package() {
+	local _src="${srcdir}/${pkgname}"
+
+	# Ship the shared noctalia config to /etc/skel. This is the whole payload —
+	# no session entry, wrapper or compositor config; those stay in each edition.
+	cp -a "${_src}/etc" "${pkgdir}/"
+
+	# Pristine, read-only golden copy at a stable path so the noctalia config can
+	# be reset back to the Kiro default after a user experiments.
+	install -dm755 "${pkgdir}/usr/share/kiro/kiro-noctalia"
+	cp -a "${_src}/etc/skel/.config/noctalia/." "${pkgdir}/usr/share/kiro/kiro-noctalia/"
+
+	if [[ -f "${_src}/LICENSE" ]]; then
+		install -dm755 "${pkgdir}${_licensedir}/${pkgname}"
+		install -m644 "${_src}/LICENSE" "${pkgdir}${_licensedir}/${pkgname}/"
+	fi
+}

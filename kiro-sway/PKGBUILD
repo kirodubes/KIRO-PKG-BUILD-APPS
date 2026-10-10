@@ -1,0 +1,50 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=kiro-sway
+_licensedir="/usr/share/kiro/licenses"
+pkgver=26.10
+pkgrel=01
+pkgdesc="sway desktop edition for Kiro (swayfx + waybar, i3-style tiler, pywal theming)"
+arch=('any')
+url="https://github.com/kirodubes/kiro-sway"
+license=('GPL3')
+# swayfx is the shipped compositor (eye-candy fork: blur/rounded corners/shadows,
+# config-compatible with sway). It Provides/Conflicts sway, so it replaces upstream
+# sway. To ship plain sway instead, swap 'swayfx' → 'sway' below (config is identical).
+depends=('swayfx' 'swaybg' 'autotiling' 'variety' 'kiro-variety-config'
+         'waybar' 'rofi'
+         'python-pywal'
+         'hyprpicker' 'kiro-wayland-dotfiles'
+         'kiro-keybindings'
+         'xdg-desktop-portal-wlr' 'xdg-desktop-portal-gtk'
+         'xdg-user-dirs' 'grim' 'slurp' 'wl-clipboard' 'wlr-randr'
+         'polkit-gnome' 'network-manager-applet'
+         'pavucontrol' 'playerctl' 'wireplumber' 'brightnessctl'
+         'xorg-xwayland' 'dconf')
+optdepends=('kanshi: multi-monitor output-profile daemon'
+            'swaylock-effects: sway-native locker (alternative to hyprlock)'
+            'betterlockscreen: blurred lock-screen image cache (Ctrl+Alt+R)'
+            'cliphist: clipboard history manager'
+            'wlogout: graphical logout / power menu'
+            'wlsunset: blue-light filter / night mode')
+makedepends=('git')
+options=(!strip !emptydirs)
+source=("${pkgname}::git+${url}")
+sha256sums=('SKIP')
+
+package() {
+	local _src="${srcdir}/${pkgname}"
+
+	# Ship the whole skel tree (sway/, waybar/, mako/, hypr/, the wallpaper, …).
+	# cp -a preserves modes and includes hidden entries.
+	cp -a "${_src}/etc" "${pkgdir}/"
+
+	# Pristine, read-only golden copy of the desktop config at a stable path so the
+	# config can be reset back to Kiro sway after a user experiments.
+	install -dm755 "${pkgdir}/usr/share/kiro/kiro-sway"
+	cp -a "${_src}/etc/skel/.config/." "${pkgdir}/usr/share/kiro/kiro-sway/"
+
+	if [[ -f "${_src}/LICENSE" ]]; then
+		install -dm755 "${pkgdir}${_licensedir}/${pkgname}"
+		install -m644 "${_src}/LICENSE" "${pkgdir}${_licensedir}/${pkgname}/"
+	fi
+}

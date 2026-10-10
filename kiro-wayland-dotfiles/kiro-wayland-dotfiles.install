@@ -1,0 +1,16 @@
+post_install() {
+	# Compile the shipped dconf source (/etc/dconf/db/local.d/00-kiro.conf) into
+	# /etc/dconf/db/local so the system-wide GTK/icon/cursor defaults actually take
+	# effect. Without this, gsettings returns the GNOME schema defaults (Adwaita,
+	# light) and bare Wayland sessions (noctalia icon resolver, GTK apps) never see
+	# the Kiro look.
+	dconf update
+}
+
+post_upgrade() {
+	post_install
+}
+
+post_remove() {
+	dconf update
+}

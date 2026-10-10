@@ -1,0 +1,25 @@
+_hide_upstream_mango() {
+    # mangowm is usually already installed when kiro-mango lands, so the
+    # pacman hook (which only fires when mango.desktop is in the transaction)
+    # will not run — apply the hide directly here.
+    /usr/bin/kiro-mango-hide-upstream-session || true
+}
+
+_unhide_upstream_mango() {
+    # Our own hide script is already gone at post_remove, so undo inline.
+    desktop=/usr/share/wayland-sessions/mango.desktop
+    [ -f "$desktop" ] && sed -i '/^NoDisplay=true$/d' "$desktop"
+    return 0
+}
+
+post_install() {
+    _hide_upstream_mango
+}
+
+post_upgrade() {
+    _hide_upstream_mango
+}
+
+post_remove() {
+    _unhide_upstream_mango
+}
