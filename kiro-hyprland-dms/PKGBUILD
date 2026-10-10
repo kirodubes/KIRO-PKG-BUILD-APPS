@@ -16,7 +16,7 @@ license=('GPL3')
 # needs the modern upstream `quickshell` (the FileBrowserModal `parentWindow` property is
 # absent in noctalia-qs 0.0.12 → the DMS shell silently fails to render). `quickshell` is
 # listed explicitly AND we `conflicts=('noctalia-qs')` so pacman refuses the incompatible
-# mix at install time instead of shipping a black shell. (Diagnosed on picard 2026-07-09.)
+# mix at install time instead of shipping a black shell. (Diagnosed on the test box 2026-07-09.)
 depends=('hyprland' 'uwsm' 'hyprpicker' 'dms-shell' 'quickshell' 'kiro-wayland-dotfiles'
          'kiro-keybindings'
          'matugen' 'cava' 'kimageformats'
