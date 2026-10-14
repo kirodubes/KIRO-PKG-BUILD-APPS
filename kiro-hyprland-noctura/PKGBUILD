@@ -3,14 +3,14 @@ pkgname=kiro-hyprland-noctura
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
 pkgrel=02
-pkgdesc="Hyprland desktop edition for Kiro (Hyprland + noctalia-shell)"
+pkgdesc="Hyprland desktop edition for Kiro (Hyprland + noctalia)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland-noctura"
 license=('GPL3')
 # No conflict with the sibling editions: each Kiro edition ships its own config
 # folder (~/.config/kiro-hyprland-noctura/ here), session entry and wrapper — no
 # shared files — so all can be installed together and picked per-login.
-depends=('hyprland' 'uwsm' 'hyprpicker' 'noctalia-shell'
+depends=('hyprland' 'uwsm' 'hyprpicker' 'noctalia'
          'kiro-wayland-dotfiles'
          'kiro-keybindings' 'xdg-desktop-portal-hyprland'
          'xdg-user-dirs' 'grim' 'slurp' 'wl-clipboard'
@@ -29,10 +29,10 @@ sha256sums=('SKIP')
 package() {
 	local _src="${srcdir}/${pkgname}"
 
-	# Ship this edition's skel tree (kiro-hyprland-noctura/ + wallpaper). The
-	# shared ~/.config/noctalia/ config comes from kiro-noctalia (a dependency),
-	# not from here — noctalia reads that fixed path, so one owner avoids the
-	# file conflict between editions. cp -a preserves modes and hidden entries.
+	# Ship this edition's skel tree (kiro-hyprland-noctura/ + wallpaper) plus
+	# noctura's own ~/.config/noctalia/00-kiro.toml — noctalia reads that fixed
+	# path, which is why this package conflicts with kiro-noctalia.
+	# cp -a preserves modes and hidden entries.
 	# System-wide dconf appearance defaults come from kiro-wayland-dotfiles.
 	cp -a "${_src}/etc" "${pkgdir}/"
 

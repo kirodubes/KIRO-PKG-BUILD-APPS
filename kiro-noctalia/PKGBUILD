@@ -3,7 +3,7 @@ pkgname=kiro-noctalia
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
 pkgrel=01
-pkgdesc="Shared noctalia-shell default config for the Kiro Wayland line (~/.config/noctalia)"
+pkgdesc="Shared noctalia (v5) default config for the Kiro Wayland line (~/.config/noctalia)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-noctalia"
 license=('GPL3')
@@ -11,7 +11,7 @@ license=('GPL3')
 # depends on this instead of shipping its own copy — noctalia always reads the
 # fixed ~/.config/noctalia/ path, so the config cannot be namespaced per
 # compositor and must come from one package to avoid a file conflict.
-depends=('noctalia-shell')
+depends=('noctalia')
 makedepends=('git')
 options=(!strip !emptydirs)
 source=("${pkgname}::git+${url}")

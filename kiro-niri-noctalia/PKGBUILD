@@ -2,8 +2,8 @@
 pkgname=kiro-niri-noctalia
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=01
-pkgdesc="niri desktop edition for Kiro (niri + noctalia-shell, scrollable-tiling Wayland)"
+pkgrel=02
+pkgdesc="niri desktop edition for Kiro (niri + noctalia, scrollable-tiling Wayland)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-niri"
 license=('GPL3')
@@ -11,7 +11,7 @@ license=('GPL3')
 # ships its own config folder (~/.config/kiro-niri-noctalia/ vs kiro-ohmyniri/ vs
 # kiro-niri-mds/), session entry, wrapper and hook — no shared files — so all can
 # be installed and picked per-login.
-depends=('niri' 'noctalia-shell' 'kiro-noctalia' 'kiro-wayland-dotfiles'
+depends=('niri' 'noctalia' 'kiro-noctalia' 'kiro-wayland-dotfiles'
          'kiro-keybindings'
          'xdg-desktop-portal-gtk'
          'xdg-user-dirs' 'wl-clipboard' 'grim' 'slurp'

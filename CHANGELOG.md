@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026.10.14
+
+### What Changed
+- noctalia recipes depend on noctalia v5. noctalia-shell v4 (Quickshell) broke on Qt 6.12: noctalia-qs was built against Qt 6.11, so every themed widget got an undefined colour and the bar rendered as empty pills. v4 is unmaintained upstream and [cachyos] now ships v5 under the noctalia-shell name without shell.qml. Native noctalia v5.2.1 from Arch [extra] was live-tested on a real-metal test box and works.
+
+### Technical Details
+- kiro-noctalia, kiro-hyprland-noctalia, kiro-niri-noctalia and kiro-hyprland-noctura now `depends=('noctalia')` (Arch [extra]) instead of `noctalia-shell`; pkgdescs reworded. Noctura's package() comment now says it ships its own noctalia config. pkgrel left to build.sh.
+
+### Files Modified
+- kiro-noctalia/PKGBUILD
+- kiro-hyprland-noctalia/PKGBUILD
+- kiro-niri-noctalia/PKGBUILD
+- kiro-hyprland-noctura/PKGBUILD
+
 ## 2026.10.10
 
 ### Kiro Wayland recipes moved here from KIROTUX-PKG-BUILD

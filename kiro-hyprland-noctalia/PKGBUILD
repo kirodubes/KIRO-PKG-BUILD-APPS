@@ -2,15 +2,15 @@
 pkgname=kiro-hyprland-noctalia
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=02
-pkgdesc="Hyprland desktop edition for Kiro (Hyprland + noctalia-shell)"
+pkgrel=03
+pkgdesc="Hyprland desktop edition for Kiro (Hyprland + noctalia)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland-noctalia"
 license=('GPL3')
 # No conflict with the sibling editions: each Kiro edition ships its own config
 # folder (~/.config/kiro-hyprland-noctalia/ here), session entry and wrapper — no
 # shared files — so all can be installed together and picked per-login.
-depends=('hyprland' 'uwsm' 'hyprpicker' 'noctalia-shell' 'kiro-noctalia'
+depends=('hyprland' 'uwsm' 'hyprpicker' 'noctalia' 'kiro-noctalia'
          'kiro-wayland-dotfiles'
          'kiro-keybindings' 'xdg-desktop-portal-hyprland'
          'xdg-user-dirs' 'grim' 'slurp' 'wl-clipboard'
