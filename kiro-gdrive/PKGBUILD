@@ -4,12 +4,13 @@ _pkgname=kiro-gdrive
 _destname1="/usr"
 _licensedir="/usr/share/kiro/licenses/"
 pkgver=26.10
-pkgrel=01
+pkgrel=04
 pkgdesc="Kiro Google Drive — mount shared Google Drive folders read-only (GTK4 + CLI, rclone)"
 arch=('any')
 url="https://github.com/kirodubes/${_pkgname}"
 license=('GPL3')
 depends=('rclone' 'fuse3' 'python' 'python-gobject' 'gtk4')
+optdepends=('kiro-news: daily notification when a shared folder gets new files')
 makedepends=('git')
 provides=("${pkgname}")
 options=(!strip !emptydirs)
@@ -20,4 +21,5 @@ package() {
 	install -dm755 "${pkgdir}${_licensedir}${_pkgname}"
 	install -m644 "${srcdir}/${_pkgname}/LICENSE" "${pkgdir}${_licensedir}${_pkgname}/LICENSE"
 	cp -r "${srcdir}/${_pkgname}/${_destname1}" "${pkgdir}"
+	cp -r "${srcdir}/${_pkgname}/etc" "${pkgdir}"
 }
