@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026.10.17
+
+### kiro-keybindings depends on python-weasyprint
+
+**What Changed.** `python-weasyprint` added to `depends`. The app's PDF button now renders with WeasyPrint, because
+a normal Kiro install has only Firefox, which can't print a PDF headless.
+
+**Technical Details.** Only the `depends` array in `kiro-keybindings/PKGBUILD` changed.
+
 ## 2026.10.14
 
 ### What Changed
