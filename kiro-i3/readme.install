@@ -1,5 +1,7 @@
 post_install() {
     echo -e "\n** The files have been installed in /etc/skel/.config/i3 **\n"
+    # The pacman hook only fires when i3-wm is part of the transaction.
+    /usr/bin/kiro-i3-hide-sessions || true
 }
 
 post_upgrade() {
