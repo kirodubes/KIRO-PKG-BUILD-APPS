@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026.10.18
+
+### Flameshot is no longer a dependency of any Kiro package
+
+**What Changed.** `kiro-qtile`, `kiro-hlwm` and `kiro-dusk` no longer list `flameshot` in `depends`. A reviewer
+unticked Flameshot in the Kiro ISO Builder and still got it on the installed system, because ticking Qtile dragged
+it back in. Flameshot is now an `optdepends` entry that names the key it powers. The stock ISO still ships
+`flameshot-git` as a TIER 3 package, so default installs are unchanged.
+
+**Technical Details.** The configs keep their `flameshot gui` key bindings; with Flameshot absent the key does
+nothing, the same way ohmychadwm, awesome and leftwm already behave. dusk's `run.sh` starts it in the background,
+so a missing binary is harmless. pkgrel is left to `build.sh`'s auto-bump.
+
+**Files Modified.** `kiro-qtile/PKGBUILD`, `kiro-hlwm/PKGBUILD`, `kiro-dusk/PKGBUILD`.
+
 ## 2026.10.17
 
 ### kiro-keybindings depends on python-weasyprint

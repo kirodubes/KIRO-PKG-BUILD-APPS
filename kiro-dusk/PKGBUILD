@@ -34,7 +34,6 @@ depends=(
 	'kiro-keybindings'
 	'archlinux-logout'
 	'feh'
-	'flameshot'
 	'maim'
 	'xclip'
 	'polkit-gnome'
@@ -48,6 +47,7 @@ depends=(
 )
 optdepends=(
 	'fastcompmgr-git: lightweight compositor (run.sh default)'
+	'flameshot: super+shift+s region screenshot (autostarted when installed)'
 	'picom: alternative compositor'
 	'volctl: volume tray applet'
 	'blueberry: bluetooth tray applet'

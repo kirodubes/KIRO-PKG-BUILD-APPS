@@ -16,7 +16,6 @@ depends=(
 	'alacritty'
 	'archlinux-logout'
 	'feh'
-	'flameshot'
 	'kiro-keybindings'
 	'kiro-rofi'
 	'kiro-rofi-themes'
@@ -37,6 +36,7 @@ depends=(
 )
 optdepends=(
 	'fastcompmgr-git: compositor for transparency and effects'
+	'flameshot: super+ctrl+Print region screenshot'
 )
 provides=("${pkgname}")
 options=(!strip !emptydirs)
