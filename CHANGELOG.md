@@ -2,6 +2,16 @@
 
 ## 2026.10.18
 
+### archlinux-tweak-tool: no doubled dependencies
+
+**What Changed.** `alacritty`, `bat` and `fzf` were listed in both `depends` and `optdepends`. They stay hard
+dependencies, and their duplicate `optdepends` lines are removed.
+
+**Technical Details.** ATT's bat+fzf viewers (System and Logs tabs) already check that the tools are installed, but
+`bat` and `fzf` are kept as `depends` so those buttons work out of the box.
+
+**Files Modified.** `archlinux-tweak-tool/PKGBUILD`.
+
 ### Flameshot is no longer a dependency of any Kiro package
 
 **What Changed.** `kiro-qtile`, `kiro-hlwm` and `kiro-dusk` no longer list `flameshot` in `depends`. A reviewer

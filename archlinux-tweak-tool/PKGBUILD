@@ -10,8 +10,7 @@ arch=('x86_64')
 url="https://github.com/kirodubes/${_pkgname}"
 license=('GPL3')
 depends=('alacritty' 'bat' 'feh' 'fzf' 'xorg-xauth' 'python-gobject' 'python-tomlkit' 'vte3' 'polkit-gnome' 'python-distro' 'python-psutil')
-optdepends=('alacritty: terminal for install/remove operations'
-            'alacritty-themes: themes for alacritty terminal'
+optdepends=('alacritty-themes: themes for alacritty terminal'
             'reflector: rank Arch mirrors by speed (Maintenance tab)'
             'rate-mirrors: alternative mirror ranking tool (Maintenance tab)'
             'hblock: block ads via hosts file (Maintenance tab)'
@@ -29,8 +28,6 @@ optdepends=('alacritty: terminal for install/remove operations'
             'gamemode: gaming performance optimizer (Performance tab)'
             'fish: friendly interactive shell (Shell tab)'
             'zsh: Z shell (Shell tab)'
-            'bat: syntax-highlighted cat replacement (Shell extras)'
-            'fzf: fuzzy finder (Shell extras)'
             'bluez: bluetooth stack (Services tab)'
             'bluez-utils: bluetooth utilities (Services tab)'
             'samba: Windows file sharing (Services tab)'
