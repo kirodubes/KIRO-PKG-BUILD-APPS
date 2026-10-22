@@ -29,7 +29,7 @@ arch=('x86_64')                   # compiles native binaries (not 'any')
 url="https://github.com/kirodubes/kiro-dwl"
 license=('GPL3')
 depends=('wlroots0.18' 'bemenu' 'bemenu-wayland' 'variety' 'kiro-variety-config'
-         'swaybg'
+         'swaybg' 'rofi' 'kiro-rofi' 'kiro-rofi-themes'
          'hyprpicker' 'kiro-wayland-dotfiles'
          'kiro-keybindings'
          'xdg-desktop-portal-wlr' 'xdg-desktop-portal-gtk'
