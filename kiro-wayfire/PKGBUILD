@@ -2,14 +2,14 @@
 pkgname=kiro-wayfire
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=08
+pkgrel=10
 pkgdesc="wayfire desktop edition for Kiro (wayfire + waybar, 3D effects, fuzzel + rofi launchers, pywal theming)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-wayfire"
 license=('GPL3')
 depends=('wayfire' 'wf-config' 'variety' 'kiro-variety-config'
          'waybar' 'swaybg' 'rofi' 'kiro-rofi' 'kiro-rofi-themes' 'kiro-powermenu' 'fuzzel'
-         'python-pywal'
+         'python-pywal16'
          'hyprpicker' 'kiro-wayland-dotfiles'
          'kiro-keybindings'
          'xdg-desktop-portal-wlr' 'xdg-desktop-portal-gtk'
