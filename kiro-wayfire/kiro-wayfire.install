@@ -1,0 +1,34 @@
+_hide_upstream_wayfire() {
+    # wayfire is usually already installed when kiro-wayfire lands, so the pacman hook (which only fires
+    # when wayfire.desktop is in the transaction) will not run — apply the hide directly here.
+    /usr/bin/kiro-wayfire-hide-upstream-session || true
+}
+
+_move_sddm_last_session() {
+    # SDDM leaves NoDisplay sessions out of its list, so a user whose last session was the plain
+    # wayfire.desktop would land in whatever comes first. Point the remembered session at Kiro Wayfire.
+    local state=/var/lib/sddm/state.conf
+    [ -f "$state" ] || return 0
+    sed -i 's#^Session=/usr/share/wayland-sessions/wayfire\.desktop$#Session=/usr/share/wayland-sessions/kiro-wayfire.desktop#' \
+        "$state" || true
+}
+
+_unhide_upstream_wayfire() {
+    local desktop=/usr/share/wayland-sessions/wayfire.desktop
+    [ -f "$desktop" ] && sed -i '/^NoDisplay=true$/d' "$desktop"
+    return 0
+}
+
+post_install() {
+    _hide_upstream_wayfire
+    _move_sddm_last_session
+}
+
+post_upgrade() {
+    _hide_upstream_wayfire
+    _move_sddm_last_session
+}
+
+post_remove() {
+    _unhide_upstream_wayfire
+}
