@@ -1,6 +1,6 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-starship
-pkgver=26.09
+pkgver=26.10
 pkgrel=01
 pkgdesc="Starship prompt configuration for Kiro"
 arch=('any')

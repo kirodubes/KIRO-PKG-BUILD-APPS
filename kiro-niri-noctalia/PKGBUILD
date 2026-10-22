@@ -2,7 +2,7 @@
 pkgname=kiro-niri-noctalia
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=02
+pkgrel=13
 pkgdesc="niri desktop edition for Kiro (niri + noctalia, scrollable-tiling Wayland)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-niri"

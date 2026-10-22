@@ -25,6 +25,14 @@ so a missing binary is harmless. pkgrel is left to `build.sh`'s auto-bump.
 
 **Files Modified.** `kiro-qtile/PKGBUILD`, `kiro-hlwm/PKGBUILD`, `kiro-dusk/PKGBUILD`.
 
+### kiro-gdrive: visible name is KiroTux Drive
+
+**What Changed.** `pkgdesc` and the post-install message now say KiroTux Drive instead of the old name Google refused.
+
+**Technical Details.** Package name, commands and paths stay `kiro-gdrive`; only user-visible strings changed.
+
+**Files Modified.** `kiro-gdrive/PKGBUILD`, `kiro-gdrive/readme.install`.
+
 ## 2026.10.17
 
 ### kiro-keybindings depends on python-weasyprint
@@ -33,6 +41,15 @@ so a missing binary is harmless. pkgrel is left to `build.sh`'s auto-bump.
 a normal Kiro install has only Firefox, which can't print a PDF headless.
 
 **Technical Details.** Only the `depends` array in `kiro-keybindings/PKGBUILD` changed.
+
+### kiro-gdrive: new recipe
+
+**What Changed.** New `kiro-gdrive/` recipe for the app that mounts shared Google Drive folders read-only. It
+builds from `kirodubes/kiro-gdrive` and publishes to nemesis_repo through `flow-kiro-gdrive`.
+
+**Technical Details.** The PKGBUILD and `build.sh` are copied from fish-tweak-tool, with `readme.install` added.
+`depends=('rclone' 'fuse3' 'python' 'python-gobject' 'gtk4')`. The recipe commit is local only, because the GitHub
+source repo doesn't exist yet.
 
 ## 2026.10.14
 
@@ -61,6 +78,16 @@ Kiro packages in nemesis_repo, not KiroTux-only, and their source repos moved fr
 **Technical Details.** The recipes are unchanged: they clone from GitHub and publish to nemesis_repo. The flows
 (`flows.manifest`, the generated `flow-kiro-*`, `flow-htt`, `flow-kiro-wayland-all`, `flow-kirotux-hyprland`,
 `flow-kirotux-wayland`) point at `~/KIRO` and `~/KIRO-PKG-BUILD-APPS`.
+
+## 2026.10.09
+
+### ohmychadwm-appearance depends on arandr
+
+**What Changed.** `arandr` added to `depends`. The app's new VirtualBox Screen section saves
+`~/.screenlayout/$USER.sh` in arandr's format so it can be edited there, and arandr pulls in `xorg-xrandr`, which
+the section runs.
+
+**Technical Details.** Only the `depends` array in `ohmychadwm-appearance/PKGBUILD` changed.
 
 ## 2026.10.08
 

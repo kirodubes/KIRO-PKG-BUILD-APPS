@@ -2,7 +2,7 @@
 pkgname=kiro-wayfire
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=01
+pkgrel=03
 pkgdesc="wayfire desktop edition for Kiro (wayfire + waybar, 3D effects, fuzzel + nwg-drawer launchers, pywal theming)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-wayfire"

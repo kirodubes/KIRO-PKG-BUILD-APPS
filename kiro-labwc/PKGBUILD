@@ -2,7 +2,7 @@
 pkgname=kiro-labwc
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=01
+pkgrel=02
 pkgdesc="labwc desktop edition for Kiro (Openbox-style stacking, waybar, pywal theming)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-labwc"

@@ -2,7 +2,7 @@
 pkgname=kiro-hyprland-noctalia
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=03
+pkgrel=05
 pkgdesc="Hyprland desktop edition for Kiro (Hyprland + noctalia)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland-noctalia"

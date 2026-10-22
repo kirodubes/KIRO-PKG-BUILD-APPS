@@ -2,7 +2,7 @@
 pkgname=kiro-plasma-keybindings
 _destname="/usr"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.09
+pkgver=26.10
 pkgrel=01
 pkgdesc="Kservice files for edu"
 arch=('any')

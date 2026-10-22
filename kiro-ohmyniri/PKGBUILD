@@ -2,7 +2,7 @@
 pkgname=kiro-ohmyniri
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=01
+pkgrel=09
 pkgdesc="niri desktop edition for Kiro with the kiro-hyprland look (niri + waybar/mako, static Tokyo Night)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-ohmyniri"

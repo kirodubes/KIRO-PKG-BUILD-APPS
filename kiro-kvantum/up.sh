@@ -2,10 +2,19 @@
 set -euo pipefail
 #####################################################################
 # Author    : Erik Dubois
-# Website   : https://www.erikdubois.be
+# Website   : https://kiroproject.be
 #####################################################################
 #
 #   DO NOT JUST RUN THIS. EXAMINE AND JUDGE. RUN AT YOUR OWN RISK.
+#
+#   Purpose:
+#   - Standard daily up-sync for any block in the ecosystem.
+#   - Ensures git remote is SSH (runs setup.sh if not), pulls latest,
+#     cleans __pycache__, optionally runs chaotic.sh / repo.sh /
+#     build/sync-videos.py, then stages, commits, and pushes the working tree.
+#
+#   Why: one command to keep a block in sync with its remote, with
+#   safe defaults (auto-rebase on rejected push, never force-push).
 #
 #####################################################################
 
@@ -103,9 +112,13 @@ git_pull() {
 
 ensure_git_remote_configured() {
     local remote_url
+    if ! git -C "${SCRIPT_DIR}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        log_error "${SCRIPT_DIR} is not a git repository — up.sh must be run from inside a project repo"
+        exit 1
+    fi
     remote_url="$(git -C "${SCRIPT_DIR}" remote get-url origin 2>/dev/null || true)"
-    if [[ "${remote_url}" != *"github.com-edu"* ]]; then
-        log_section "Git remote not configured — running setup.sh first"
+    if [[ "${remote_url}" != git@* ]]; then
+        log_warn "Git remote is not SSH (${remote_url:-unset}) — running setup.sh to fix"
         bash "${SCRIPT_DIR}/setup.sh"
     fi
 }
@@ -114,20 +127,30 @@ git_commit_and_push() {
     local branch
 
     log_section "Git add / commit / push"
-    git add --all .
-
-    if [[ -z "$(git status --porcelain)" ]]; then
-        log_info "Nothing to commit — working tree clean"
-    else
-        git commit -m "update" || log_error "Git commit failed"
+    git -C "${SCRIPT_DIR}" add --all .
+    # GUARD: keybindings.html/pdf are generated on demand by the kiro-keybindings app —
+    # they must NEVER be committed. Abort loudly if any are tracked/staged.
+    local kb_artifacts
+    kb_artifacts="$(git -C "${SCRIPT_DIR}" ls-files -- '*keybindings.html' '*keybindings.pdf')"
+    if [[ -n "${kb_artifacts}" ]]; then
+        log_error "BLOCKED: keybindings.html/pdf must never be committed — kiro-keybindings generates them on demand:"
+        echo "${kb_artifacts}"
+        echo "Fix: git -C \"${SCRIPT_DIR}\" rm --cached <file> ; add to .gitignore ; re-run up.sh"
+        exit 1
     fi
 
-    branch="$(git rev-parse --abbrev-ref HEAD)"
+    if [[ -z "$(git -C "${SCRIPT_DIR}" status --porcelain)" ]]; then
+        log_info "Nothing to commit — working tree clean"
+    else
+        git -C "${SCRIPT_DIR}" commit -m "${COMMIT_MSG:-update}" || log_error "Git commit failed"
+    fi
 
-    if ! git push -u origin "${branch}"; then
+    branch="$(git -C "${SCRIPT_DIR}" rev-parse --abbrev-ref HEAD)"
+
+    if ! git -C "${SCRIPT_DIR}" push -u origin "${branch}"; then
         log_warn "Push rejected — rebasing on remote changes and retrying"
-        git pull --rebase origin "${branch}" || { log_error "Rebase failed — resolve conflicts manually"; return 1; }
-        git push -u origin "${branch}" || log_error "Git push failed after rebase"
+        git -C "${SCRIPT_DIR}" pull --rebase origin "${branch}" || { log_error "Rebase failed — resolve conflicts manually"; return 1; }
+        git -C "${SCRIPT_DIR}" push -u origin "${branch}" || log_error "Git push failed after rebase"
     fi
 }
 
@@ -147,6 +170,15 @@ main() {
     if [[ -f "${SCRIPT_DIR}/repo.sh" ]]; then
         log_section "Running repo.sh"
         bash "${SCRIPT_DIR}/repo.sh"
+    fi
+
+    # Optional per-repo hook: if a block ships build/sync-videos.py (currently
+    # only kiro-assistant), regenerate its generated content before committing.
+    # Inert in every other repo. Non-fatal so a missing creds/deps never blocks
+    # the push.
+    if [[ -f "${SCRIPT_DIR}/build/sync-videos.py" ]]; then
+        log_section "Running build/sync-videos.py"
+        python "${SCRIPT_DIR}/build/sync-videos.py" || log_warn "Video sync skipped (missing creds or deps) — keeping current files"
     fi
 
     git_commit_and_push

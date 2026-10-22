@@ -2,7 +2,7 @@
 pkgname=kiro-hyprland
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=02
+pkgrel=04
 pkgdesc="Hyprland desktop rice for Kiro (hypr, waybar, mako, wallpaper)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland"

@@ -2,8 +2,8 @@
 pkgname=kiro-bspwm
 _destname="/etc/skel/.config/bspwm/"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.09
-pkgrel=01
+pkgver=26.10
+pkgrel=04
 pkgdesc="Desktop configuration for Kiro"
 arch=('any')
 url="https://github.com/kirodubes/kiro-bspwm"

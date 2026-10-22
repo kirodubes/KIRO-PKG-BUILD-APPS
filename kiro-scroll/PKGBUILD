@@ -2,7 +2,7 @@
 pkgname=kiro-scroll
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=01
+pkgrel=02
 pkgdesc="scroll desktop edition for Kiro (sway-scroll + waybar, scrollable-tiling Wayland, pywal theming)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-scroll"

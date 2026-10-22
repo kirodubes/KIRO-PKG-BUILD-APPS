@@ -1,5 +1,5 @@
 post_install() {
-    echo -e "\n** Kiro Google Drive installed"
+    echo -e "\n** KiroTux Drive installed"
     echo -e "** Launch it from your menu or run: kiro-gdrive (or kgd in a terminal)"
     echo -e "** Paste a shared folder link; it mounts read-only under ~/GoogleDrive"
     echo -e "**\n"

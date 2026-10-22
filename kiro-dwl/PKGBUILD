@@ -22,7 +22,7 @@
 pkgname=kiro-dwl
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=01
+pkgrel=03
 _dwlver=0.7                       # dwl release tag to build  (ALIGN — see gate above)
 pkgdesc="dwl desktop edition for Kiro (patched dwl + dwlb, suckless dwm-for-Wayland)"
 arch=('x86_64')                   # compiles native binaries (not 'any')

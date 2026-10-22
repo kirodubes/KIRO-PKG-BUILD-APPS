@@ -2,7 +2,7 @@
 pkgname=kiro-sway
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.10
-pkgrel=01
+pkgrel=02
 pkgdesc="sway desktop edition for Kiro (swayfx + waybar, i3-style tiler, pywal theming)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-sway"

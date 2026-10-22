@@ -4,12 +4,12 @@ _pkgname=ohmychadwm-appearance
 _destname1="/usr"
 _licensedir="/usr/share/kiro/licenses/"
 pkgver=26.10
-pkgrel=01
+pkgrel=09
 pkgdesc="ohmychadwm Appearance — GTK4 theme, icon, cursor and font switcher for ohmychadwm"
 arch=('any')
 url="https://github.com/kirodubes/${_pkgname}"
 license=('GPL3')
-depends=('ohmychadwm' 'python-gobject' 'gtk4' 'xfconf' 'polkit')
+depends=('ohmychadwm' 'python-gobject' 'gtk4' 'xfconf' 'polkit' 'arandr')
 optdepends=('xdotool: restart ohmychadwm from the app after a bar change'
             'xorg-xrdb: apply the cursor to ~/.Xresources live')
 makedepends=('git')
