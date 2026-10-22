@@ -23,6 +23,7 @@ depends=(
 	'dmenu'
 	'kiro-rofi'
 	'kiro-rofi-themes'
+	'kiro-powermenu'
 	'feh'
 	'lxappearance'
 	'gcc'

@@ -17,6 +17,7 @@ depends=(
 	'rofi'
 	'kiro-rofi'
 	'kiro-rofi-themes'
+	'kiro-powermenu'
 	'kiro-keybindings'
 	'archlinux-logout'
 	'betterlockscreen'

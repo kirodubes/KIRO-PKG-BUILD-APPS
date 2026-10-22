@@ -20,6 +20,7 @@ depends=(
 	'kiro-keybindings'
 	'kiro-rofi'
 	'kiro-rofi-themes'
+	'kiro-powermenu'
 	'numlockx'
 	'pamixer'
 	'playerctl'
