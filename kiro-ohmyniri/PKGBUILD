@@ -10,7 +10,7 @@ license=('GPL3')
 # No conflict with kiro-niri: each edition ships its own config folder
 # (~/.config/kiro-ohmyniri/ vs kiro-niri/), session entry, wrapper and hook —
 # no shared files — so both can be installed and picked per-login.
-depends=('niri' 'waybar' 'swaybg' 'rofi' 'kiro-rofi' 'kiro-rofi-themes' 'gtklock' 'swayidle'
+depends=('niri' 'waybar' 'swaybg' 'rofi' 'kiro-rofi' 'kiro-rofi-themes' 'kiro-powermenu' 'gtklock' 'swayidle'
          'kiro-wayland-dotfiles'
          'variety' 'kiro-variety-config'
          'kiro-keybindings'

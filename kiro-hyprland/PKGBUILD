@@ -8,7 +8,7 @@ arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland"
 license=('GPL3')
 depends=('hyprland' 'uwsm' 'hyprpicker' 'kiro-wayland-dotfiles' 'variety' 'kiro-variety-config'
-         'waybar' 'swaybg' 'rofi' 'kiro-rofi' 'kiro-rofi-themes'
+         'waybar' 'swaybg' 'rofi' 'kiro-rofi' 'kiro-rofi-themes' 'kiro-powermenu'
          'hyprland-tweak-tool' 'kiro-keybindings' 'xdg-desktop-portal-hyprland'
          'grim' 'slurp' 'wl-clipboard'
          'polkit-gnome' 'network-manager-applet'
