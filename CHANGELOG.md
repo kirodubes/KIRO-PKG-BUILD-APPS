@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026.10.22
+
+### Edition packages bring what the ISO core no longer ships
+
+**What Changed.** The Kiro ISO's TIER 2 core used to ship `lxappearance`, `kiro-rofi`, `kiro-rofi-themes` and
+`kiro-powermenu` on every edition, Plasma, GNOME and Cinnamon included. They moved out of the core, so the
+editions that call them now depend on them, and an install through ATT gets them too.
+- `lxappearance` (the only GTK theme setter on X11 tiling WMs): the 9 X11 tiling WMs.
+- `kiro-rofi` + `kiro-rofi-themes` (kiro-rofi installs the `config.rasi` every plain `rofi` call reads): every
+  edition that runs rofi, the 9 X11 tiling WMs, kiro-hyprland, kiro-labwc, kiro-mango, kiro-ohmyniri, kiro-river,
+  kiro-scroll, kiro-sway, kiro-wayfire and kiro-dwl. kiro-awesome, kiro-bspwm, kiro-i3, kiro-leftwm and kiro-dwl
+  also gain `rofi` itself, which their configs call but never declared.
+- `kiro-powermenu` (Super+Shift+X): the 9 X11 tiling WMs plus kiro-hyprland, kiro-wayfire and kiro-ohmyniri.
+- `kiro-powermenu` now depends on `rofi`: the menu is `rofi -dmenu` with `.rasi` styles.
+
+**Technical Details.** `depends` arrays only. Committed in five commits while this repo had unrelated uncommitted
+work, so each commit staged just its own lines on top of `HEAD`. Built and published the same day; the
+`nemesis_repo` database shows the new dependencies.
+
+**Files Modified.** `kiro-awesome`, `kiro-bspwm`, `kiro-chadwm`, `kiro-dusk`, `kiro-hlwm`, `kiro-i3`,
+`kiro-leftwm`, `kiro-qtile`, `ohmychadwm`, `kiro-hyprland`, `kiro-labwc`, `kiro-mango`, `kiro-ohmyniri`,
+`kiro-river`, `kiro-scroll`, `kiro-sway`, `kiro-wayfire`, `kiro-dwl`, `kiro-powermenu` (each `PKGBUILD`).
+
 ## 2026.10.18
 
 ### archlinux-tweak-tool: no doubled dependencies
