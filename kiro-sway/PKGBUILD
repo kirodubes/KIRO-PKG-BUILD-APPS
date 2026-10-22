@@ -11,7 +11,7 @@ license=('GPL3')
 # config-compatible with sway). It Provides/Conflicts sway, so it replaces upstream
 # sway. To ship plain sway instead, swap 'swayfx' → 'sway' below (config is identical).
 depends=('swayfx' 'swaybg' 'autotiling' 'variety' 'kiro-variety-config'
-         'waybar' 'rofi'
+         'waybar' 'rofi' 'kiro-rofi' 'kiro-rofi-themes'
          'python-pywal'
          'hyprpicker' 'kiro-wayland-dotfiles'
          'kiro-keybindings'

@@ -12,7 +12,7 @@ license=('GPL3')
 # Layout generator is the built-in rivertile (zero build); wideriver (AUR, dwm/xmonad
 # layouts) is the documented upgrade and would be the line's first nemesis_repo build.
 depends=('river-classic' 'swaybg' 'variety' 'kiro-variety-config'
-         'waybar' 'rofi'
+         'waybar' 'rofi' 'kiro-rofi' 'kiro-rofi-themes'
          'python-pywal'
          'hyprpicker' 'kiro-wayland-dotfiles'
          'kiro-keybindings'

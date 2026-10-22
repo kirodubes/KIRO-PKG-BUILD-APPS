@@ -8,7 +8,7 @@ arch=('any')
 url="https://github.com/kirodubes/kiro-labwc"
 license=('GPL3')
 depends=('labwc' 'swaybg' 'variety' 'kiro-variety-config'
-         'waybar' 'rofi'
+         'waybar' 'rofi' 'kiro-rofi' 'kiro-rofi-themes'
          'python-pywal'
          'hyprpicker' 'kiro-wayland-dotfiles'
          'kiro-keybindings'

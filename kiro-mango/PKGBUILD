@@ -9,7 +9,7 @@ url="https://github.com/kirodubes/kiro-mango"
 license=('GPL3')
 # mangowm is the compositor (cachyos — wired into Kiro's pacman.conf, no build).
 depends=('mangowm' 'swaybg' 'variety' 'kiro-variety-config'
-         'waybar' 'rofi'
+         'waybar' 'rofi' 'kiro-rofi' 'kiro-rofi-themes'
          'python-pywal'
          'hyprpicker' 'kiro-wayland-dotfiles'
          'kiro-keybindings'

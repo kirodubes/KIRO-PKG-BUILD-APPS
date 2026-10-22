@@ -11,7 +11,7 @@ license=('GPL3')
 # PaperWM-style scrolling column layout). AUR-only upstream; Kiro builds it into
 # nemesis_repo, so this package depends on it there.
 depends=('sway-scroll' 'swaybg' 'variety' 'kiro-variety-config'
-         'waybar' 'rofi'
+         'waybar' 'rofi' 'kiro-rofi' 'kiro-rofi-themes'
          'python-pywal'
          'hyprpicker' 'kiro-wayland-dotfiles'
          'kiro-keybindings'
