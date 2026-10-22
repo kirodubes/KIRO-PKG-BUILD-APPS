@@ -30,6 +30,7 @@ depends=(
 	'kiro-rofi'
 	'kiro-rofi-themes'
 	'feh'
+	'lxappearance'
 	'gcc'
 	'git'
 	'imlib2'

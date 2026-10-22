@@ -11,7 +11,7 @@ license=('GPL3')
 replaces=('edu-leftwm-git')
 conflicts=('edu-leftwm-git')
 makedepends=('git')
-depends=()
+depends=('lxappearance')
 optdepends=('ttf-sourcecodepro-nerd'
 'ttf-iosevka-nerd' 
 'ttf-material-design-iconic-font'

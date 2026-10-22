@@ -16,6 +16,7 @@ depends=(
 	'alacritty'
 	'archlinux-logout'
 	'feh'
+	'lxappearance'
 	'kiro-keybindings'
 	'kiro-rofi'
 	'kiro-rofi-themes'

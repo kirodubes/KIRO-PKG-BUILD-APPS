@@ -19,6 +19,7 @@ depends=(
 	'archlinux-logout'
 	'betterlockscreen'
 	'feh'
+	'lxappearance'
 	'maim'
 	'xclip'
 	'polkit-gnome'
