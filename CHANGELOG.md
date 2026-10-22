@@ -2,6 +2,14 @@
 
 ## 2026.10.22
 
+### Editions depend on pamixer and Font Awesome
+
+**What Changed.** `pamixer` and `ttf-font-awesome` left the ISO core, so the packages whose configs call them now depend on them.
+
+**Technical Details.** `pamixer` added to kiro-awesome, kiro-bspwm, kiro-chadwm, kiro-i3, kiro-leftwm, ohmychadwm and kiro-xfce (kiro-hlwm and kiro-qtile already had it). `ttf-font-awesome` added to kiro-polybar, whose `config.ini` sets `font-1 = "FontAwesome"`. No version bump here; the flows do that.
+
+**Files Modified.** `kiro-awesome/PKGBUILD`, `kiro-bspwm/PKGBUILD`, `kiro-chadwm/PKGBUILD`, `kiro-i3/PKGBUILD`, `kiro-leftwm/PKGBUILD`, `ohmychadwm/PKGBUILD`, `kiro-xfce/PKGBUILD`, `kiro-polybar/PKGBUILD`
+
 ### Edition packages bring what the ISO core no longer ships
 
 **What Changed.** The Kiro ISO's TIER 2 core used to ship `lxappearance`, `kiro-rofi`, `kiro-rofi-themes` and

@@ -24,6 +24,7 @@ depends=(
 	'kiro-rofi'
 	'kiro-rofi-themes'
 	'kiro-powermenu'
+	'pamixer'
 	'feh'
 	'lxappearance'
 	'gcc'
