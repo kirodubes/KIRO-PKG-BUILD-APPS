@@ -12,7 +12,7 @@ license=('GPL3')
 # nemesis_repo, so this package depends on it there.
 depends=('sway-scroll' 'swaybg' 'variety' 'kiro-variety-config'
          'waybar' 'rofi' 'kiro-rofi' 'kiro-rofi-themes'
-         'python-pywal'
+         'python-pywal16'
          'hyprpicker' 'kiro-wayland-dotfiles'
          'kiro-keybindings'
          'xdg-desktop-portal-wlr' 'xdg-desktop-portal-gtk'
