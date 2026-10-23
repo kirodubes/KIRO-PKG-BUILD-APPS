@@ -9,7 +9,7 @@ url="https://github.com/kirodubes/kiro-labwc"
 license=('GPL3')
 depends=('labwc' 'swaybg' 'variety' 'kiro-variety-config'
          'waybar' 'rofi' 'kiro-rofi' 'kiro-rofi-themes'
-         'python-pywal'
+         'python-pywal16'
          'hyprpicker' 'kiro-wayland-dotfiles'
          'kiro-keybindings'
          'xdg-desktop-portal-wlr' 'xdg-desktop-portal-gtk'
