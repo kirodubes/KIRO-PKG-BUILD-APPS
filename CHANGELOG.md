@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026.10.25
+
+### kiro-hyprland no longer depends on hyprland-tweak-tool
+
+**What Changed.** Hyprland Tweak Tool is frozen, and the Kiro Hyprland desktop never needed it to run, so it is no longer pulled in with kiro-hyprland. Systems that already have it keep it until they remove it.
+
+**Technical Details.** Dropped `'hyprland-tweak-tool'` from the `depends` array. The golden config copy in `/usr/share/kiro/kiro-hyprland` stays. No version bump here; the flows do that.
+
+**Files Modified.** `kiro-hyprland/PKGBUILD`
+
 ## 2026.10.22
 
 ### Editions depend on pamixer and Font Awesome
