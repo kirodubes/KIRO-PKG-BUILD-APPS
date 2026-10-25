@@ -1,0 +1,29 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=ohmychadwm-tweak-tool
+_pkgname=ohmychadwm-tweak-tool
+_destname1="/usr"
+_licensedir="/usr/share/kiro/licenses/"
+pkgver=26.10
+pkgrel=04
+pkgdesc="Ohmychadwm Tweak Tool — look, bar, wallpaper, displays, mouse, startup apps, default apps and keys for ohmychadwm"
+arch=('any')
+url="https://github.com/kirodubes/${_pkgname}"
+license=('GPL3')
+depends=('ohmychadwm' 'python-gobject' 'gtk4' 'xfconf' 'polkit' 'arandr' 'xorg-xinput' 'feh' 'xdg-utils')
+optdepends=('xdotool: restart ohmychadwm from the app after a bar change'
+            'xorg-xrdb: apply the cursor to ~/.Xresources live'
+            'variety: the Variety wallpaper sources and Previous/Next')
+makedepends=('git')
+# Replaces Ohmychadwm Appearance: pacman -Syu offers the swap, and provides keeps ohmychadwm's old dependency met
+provides=('ohmychadwm-appearance')
+conflicts=('ohmychadwm-appearance')
+replaces=('ohmychadwm-appearance')
+options=(!strip !emptydirs)
+source=("${_pkgname}::git+${url}.git")
+sha256sums=('SKIP')
+install='readme.install'
+package() {
+	install -dm755 "${pkgdir}${_licensedir}${_pkgname}"
+	install -m644 "${srcdir}/${_pkgname}/LICENSE" "${pkgdir}${_licensedir}${_pkgname}/LICENSE"
+	cp -r "${srcdir}/${_pkgname}/${_destname1}" "${pkgdir}"
+}

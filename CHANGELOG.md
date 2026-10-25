@@ -2,6 +2,14 @@
 
 ## 2026.10.25
 
+### ohmychadwm-tweak-tool replaces ohmychadwm-appearance
+
+**What Changed.** New recipe `ohmychadwm-tweak-tool`, the successor of Ohmychadwm Appearance (its Look page is the old app). `ohmychadwm` now depends on it instead of on `ohmychadwm-appearance`, so Kiro and Kiro-next get it, and on the next `pacman -Syu` users are asked to replace `ohmychadwm-appearance` with it.
+
+**Technical Details.** The new PKGBUILD has `provides`, `conflicts` and `replaces=('ohmychadwm-appearance')`. `provides` keeps an installed `ohmychadwm` that still depends on the old name working. New depends over OMA's: `xorg-xinput`, `feh`, `xdg-utils`; `variety` optional. `pkgrel=04` because test builds `26.10-01`..`-04` were installed by hand on a test box; the first flow build is `-05`. `build.sh` copied unchanged from the `ohmychadwm-appearance` recipe. Build `ohmychadwm-tweak-tool` before `ohmychadwm`. The `ohmychadwm-appearance` recipe stays until it leaves nemesis_repo.
+
+**Files Modified.** `ohmychadwm-tweak-tool/PKGBUILD`, `ohmychadwm-tweak-tool/build.sh`, `ohmychadwm-tweak-tool/readme.install` (new), `ohmychadwm/PKGBUILD`
+
 ### kiro-hyprland no longer depends on hyprland-tweak-tool
 
 **What Changed.** Hyprland Tweak Tool is frozen, and the Kiro Hyprland desktop never needed it to run, so it is no longer pulled in with kiro-hyprland. Systems that already have it keep it until they remove it.

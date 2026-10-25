@@ -21,7 +21,7 @@ makedepends=(
 	'gcc'
 )
 depends=(
-	'ohmychadwm-appearance'
+	'ohmychadwm-tweak-tool'
 	'kiro-ohmychadwm-hook'
 	'kiro-keybindings'
 	'acpi'
