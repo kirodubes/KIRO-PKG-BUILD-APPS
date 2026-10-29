@@ -4,7 +4,7 @@ _pkgname=archlinux-tweak-tool
 _destname1="/usr"
 _licensedir="/usr/share/kiro/licenses/"
 pkgver=26.10
-pkgrel=19
+pkgrel=39
 pkgdesc="Arch Linux Tweak Tool or ATT"
 arch=('x86_64')
 url="https://github.com/kirodubes/${_pkgname}"
@@ -32,7 +32,8 @@ optdepends=('alacritty-themes: themes for alacritty terminal'
             'bluez-utils: bluetooth utilities (Services tab)'
             'samba: Windows file sharing (Services tab)'
             'cups: printing system (Services tab)'
-            'pipewire: modern audio system (Services tab)')
+            'pipewire: modern audio system (Services tab)'
+            'swaybg: set wallpapers on Wayland compositors (Wallpaper tab)')
 makedepends=('git')
 options=(!strip !emptydirs)
 provides=('archlinux-tweak-tool-gtk4')

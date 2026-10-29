@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026.10.29
+
+### archlinux-tweak-tool: swaybg listed as optional
+
+**What Changed.** ATT's Wallpaper tab now applies wallpapers on every desktop. On a Wayland compositor without a desktop shell (sway, wayfire, mango, plain Hyprland or niri) it uses swaybg, so the package now lists it as optional. Kiro's own Wayland editions already ship swaybg, noctalia or DMS. The new line tells users of other distros what to install.
+
+**Technical Details.** New optdepends entry `'swaybg: set wallpapers on Wayland compositors (Wallpaper tab)'`. pacman only lists optional dependencies, so nothing gets installed. No pkgrel bump by hand; the flow build sets the version.
+
+**Files Modified.** `archlinux-tweak-tool/PKGBUILD`
+
 ## 2026.10.25
 
 ### ohmychadwm-tweak-tool replaces ohmychadwm-appearance
