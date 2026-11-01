@@ -2,6 +2,14 @@
 
 ## 2026.11.01
 
+### kiro-iso-builder: ship the translations
+
+**What Changed.** The production builder got the translations from nemesis, so its package installs the catalogs too.
+
+**Technical Details.** The same `locale/` → `/usr/share/locale/` copy as in the nemesis PKGBUILD below. Both packages own the same `.mo` files, which is fine because they conflict with each other.
+
+**Files Modified.** `kiro-iso-builder/PKGBUILD`
+
 ### kiro-iso-builder-nemesis: ship the translations
 
 **What Changed.** The nemesis builder is now translated into 13 languages, so the package installs its compiled catalogs. Without them the app would stay English.

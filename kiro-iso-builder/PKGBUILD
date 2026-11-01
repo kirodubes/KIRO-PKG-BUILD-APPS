@@ -3,7 +3,7 @@ pkgname=kiro-iso-builder
 _pkgname=kiro-iso-builder
 _licensedir="/usr/share/kiro/licenses/"
 pkgver=26.10
-pkgrel=06
+pkgrel=07
 pkgdesc="GTK4 front-end for building the Kiro ISO, with one-click host pre-flight fixes"
 arch=('any')
 url="https://github.com/kirodubes/${_pkgname}"
@@ -49,6 +49,10 @@ package() {
 		"${pkgdir}/usr/share/icons/hicolor/scalable/apps/builder.svg"
 	install -Dm644 "${_src}/builder.svg" \
 		"${pkgdir}/usr/share/pixmaps/builder.svg"
+
+	# Translations: po/make-mo.sh compiles them into the repo's locale/ tree.
+	install -dm755 "${pkgdir}/usr/share/locale"
+	cp -r "${_src}/locale/." "${pkgdir}/usr/share/locale/"
 
 	# License (Kiro convention).
 	install -Dm644 "${_src}/LICENSE" "${pkgdir}${_licensedir}${_pkgname}/LICENSE"
