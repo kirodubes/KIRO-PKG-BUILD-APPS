@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026.11.01
+
+### kiro-iso-builder-nemesis: ship the translations
+
+**What Changed.** The nemesis builder is now translated into 13 languages, so the package installs its compiled catalogs. Without them the app would stay English.
+
+**Technical Details.** `package()` copies the source repo's `locale/` tree (built by its `po/make-mo.sh`) to `/usr/share/locale/`, giving `/usr/share/locale/<lang>/LC_MESSAGES/kiro-iso-builder.mo`. The domain is the unprefixed app name, like the rest of the drop-in. Production `kiro-iso-builder` gets the same lines when the translations are ported there.
+
+**Files Modified.** `kiro-iso-builder-nemesis/PKGBUILD`
+
 ## 2026.10.29
 
 ### archlinux-tweak-tool: swaybg listed as optional
