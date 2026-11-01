@@ -2,6 +2,14 @@
 
 ## 2026.11.01
 
+### kiro-hyprland-dms: depend on dux-shell
+
+**What Changed.** Arch `[extra]` replaced `dms-shell` with `dux-shell` today. The recipe still asked for `dms-shell`, and `[cachyos]` still carries a package by that exact name, so the hyprland-dms ISO installed cachyos's `dms-shell` and the first `pacman -Syu` on an installed system asked "Replace dms-shell with extra/dux-shell?". kiro-niri-dms already made the same switch.
+
+**Technical Details.** `depends`: `dms-shell` → `dux-shell`. dux-shell `Provides`/`Replaces` dms-shell, so existing installs move over on their next upgrade. `build.sh` bumps the version to 26.11-01.
+
+**Files Modified.** `kiro-hyprland-dms/PKGBUILD`
+
 ### kiro-iso-builder: ship the translations
 
 **What Changed.** The production builder got the translations from nemesis, so its package installs the catalogs too.
