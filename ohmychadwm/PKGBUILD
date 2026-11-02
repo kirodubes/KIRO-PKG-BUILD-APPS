@@ -7,8 +7,8 @@ _destname2="/etc/skel/.bin/"
 #_destname4="/usr/share/man/man1/"
 _destname5="/usr/"
 _licensedir="/usr/share/edu/licenses/"
-pkgver=26.10
-pkgrel=11
+pkgver=26.11
+pkgrel=06
 pkgdesc="Configuration files"
 arch=('any')
 url="https://github.com/kirodubes/ohmychadwm"
@@ -53,6 +53,7 @@ depends=(
 
 optdepends=(
   'fastcompmgr-git: compositor for transparency and effects'
+  'xdotool: the showcase scripts in /usr/share/ohmychadwm/showcase'
 )
 options=(!strip !emptydirs)
 source=(${_pkgname}::"git+https://github.com/kirodubes/${_pkgname}.git")
