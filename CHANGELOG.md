@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026.11.03
+
+### ohmychadwm: optdepends for a complete desktop on plain Arch
+
+**What Changed.** A plain Arch install with ohmychadwm, compared with an installed kiro-ohmychadwm ISO, lacked the network, clipboard, Bluetooth and update tray icons, numlock at login, the XDG home folders, Thunar automount and trash, and the targets of several keybindings. `run.sh` and `sxhkdrc` call these tools but skip them without an error when they are absent. The package now lists every one of them as an optdepend with what it is for. They are optdepends, not depends, so a plain Arch user keeps a clean install and chooses what to add.
+
+**Technical Details.** The list comes from the commands that `run.sh`, `sxhkdrc` and the scripts call, checked against what was missing on the test box. Audio (pulseaudio vs pipewire) is left out on purpose: a WM package should not swap the user's sound stack. `depends` is unchanged.
+
+**Files Modified.** `ohmychadwm/PKGBUILD`
+
 ## 2026.11.01
 
 ### kiro-hyprland-dms: depend on dux-shell

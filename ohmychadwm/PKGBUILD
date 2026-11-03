@@ -8,7 +8,7 @@ _destname2="/etc/skel/.bin/"
 _destname5="/usr/"
 _licensedir="/usr/share/edu/licenses/"
 pkgver=26.11
-pkgrel=06
+pkgrel=15
 pkgdesc="Configuration files"
 arch=('any')
 url="https://github.com/kirodubes/ohmychadwm"
@@ -54,6 +54,38 @@ depends=(
 optdepends=(
   'fastcompmgr-git: compositor for transparency and effects'
   'xdotool: the showcase scripts in /usr/share/ohmychadwm/showcase'
+  'network-manager-applet: network tray icon (autostarted)'
+  'flameshot: screenshot tray (autostarted)'
+  'xfce4-clipman-plugin: clipboard manager (autostarted)'
+  'xfce4-power-manager: battery and display power management (autostarted)'
+  'xfce4-notifyd: desktop notifications (autostarted)'
+  'polkit-gnome: graphical password prompts (autostarted)'
+  'volctl: volume tray icon (autostarted)'
+  'blueberry: Bluetooth tray (autostarted)'
+  'pamac-aur: update tray and package manager (autostarted)'
+  'numlockx: numlock on at login (autostarted)'
+  'xdg-user-dirs: create Desktop, Downloads, Documents at login'
+  'gvfs: trash and automount in Thunar'
+  'udisks2: mount USB drives from Thunar'
+  'thunar-volman: automount removable media in Thunar'
+  'thunar-archive-plugin: archive right-click menu in Thunar'
+  'file-roller: archive backend for thunar-archive-plugin'
+  'gnome-keyring: password storage for browsers'
+  'playerctl: media keys'
+  'xorg-xkill: Super+Shift+Escape kill window'
+  'xorg-xbacklight: brightness keys'
+  'scrot: Print key screenshot'
+  'xfce4-appfinder: Alt+F2 and Alt+F3'
+  'python-pywal16: wal colour scheme keybinding'
+  'alacritty-tweak-tool: keybinding'
+  'fish-tweak-tool: keybinding'
+  'fastfetch-tweak-tool: keybinding'
+  'meld: keybinding'
+  'gimp: keybinding'
+  'inkscape: keybinding'
+  'vlc: keybinding'
+  'obs-studio: keybinding'
+  'mintstick: keybinding'
 )
 options=(!strip !emptydirs)
 source=(${_pkgname}::"git+https://github.com/kirodubes/${_pkgname}.git")
