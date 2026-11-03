@@ -35,6 +35,13 @@ package() {
 	# installed theme. A skel kvantum.kvconfig would clash with kiro-kvantum, so no file ships.
 	install -Dm755 "${_src}/usr/bin/kiro-kvantum-default" "${pkgdir}/usr/bin/kiro-kvantum-default"
 
+	# Ctrl+Alt+H on the KiroTux editions: opens the premium app, or tells about it when it is missing.
+	install -Dm755 "${_src}/usr/bin/kiro-premium-hint" "${pkgdir}/usr/bin/kiro-premium-hint"
+
+	# Translations of the helpers' notifications (built by po/make-mo.sh in the source repo).
+	install -dm755 "${pkgdir}/usr/share/locale"
+	cp -a "${_src}/usr/share/locale/." "${pkgdir}/usr/share/locale/"
+
 	# Pristine golden copy at a stable path.
 	install -dm755 "${pkgdir}/usr/share/kiro/kiro-wayland-dotfiles"
 	cp -a "${_src}/etc/skel/.config/." "${pkgdir}/usr/share/kiro/kiro-wayland-dotfiles/"

@@ -2,6 +2,14 @@
 
 ## 2026.11.03
 
+### kiro-wayland-dotfiles: ship kiro-premium-hint and the translations
+
+**What Changed.** The package installs the new `/usr/bin/kiro-premium-hint` (Ctrl+Alt+H on the KiroTux editions: opens the premium app, or a translated notification about it) and the 13 `.mo` catalogs of its helpers' notifications to `/usr/share/locale`.
+
+**Technical Details.** Two `install` steps in `package()`; the `.mo` files are built in the source repo by `po/make-mo.sh`. The hyprland, niri and wayfire editions call the helper now, so this package must be rebuilt before them.
+
+**Files Modified.** `kiro-wayland-dotfiles/PKGBUILD`
+
 ### ohmychadwm: optdepends for a complete desktop on plain Arch
 
 **What Changed.** A plain Arch install with ohmychadwm, compared with an installed kiro-ohmychadwm ISO, lacked the network, clipboard, Bluetooth and update tray icons, numlock at login, the XDG home folders, Thunar automount and trash, and the targets of several keybindings. `run.sh` and `sxhkdrc` call these tools but skip them without an error when they are absent. The package now lists every one of them as an optdepend with what it is for. They are optdepends, not depends, so a plain Arch user keeps a clean install and chooses what to add.
