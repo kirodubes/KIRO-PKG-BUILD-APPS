@@ -1,0 +1,73 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=kiro-hyprland-impasto
+_licensedir="/usr/share/kiro/licenses"
+pkgver=26.11
+pkgrel=01
+pkgdesc="Hyprland desktop edition for Kiro (Hyprland + impasto)"
+arch=('any')
+url="https://github.com/kirodubes/kiro-hyprland-impasto"
+license=('GPL-3.0-or-later')
+# No conflict with the sibling editions: each Kiro edition ships its own config
+# folder (~/.config/kiro-hyprland-impasto/ here), session entry and wrapper, and
+# the impasto shell lives in its own /etc/xdg/quickshell/impasto, so all can be
+# installed together and picked per-login.
+depends=('hyprland' 'uwsm' 'quickshell' 'awww' 'python' 'imagemagick'
+         'kiro-wayland-dotfiles' 'kiro-keybindings' 'xdg-desktop-portal-hyprland'
+         'xdg-user-dirs' 'grim' 'slurp' 'wl-clipboard' 'libnotify'
+         'playerctl' 'wireplumber' 'brightnessctl' 'ddcutil' 'upower'
+         'hyprsunset' 'hyprpicker' 'pacman-contrib'
+         'qt6ct' 'qt6-multimedia' 'qt6-multimedia-ffmpeg'
+         'papirus-icon-theme' 'bibata-cursor-theme' 'inter-font'
+         'ttf-jetbrains-mono-nerd' 'noto-fonts-emoji'
+         'unicode-emoji' 'unicode-cldr-annotations' 'iso-codes'
+         'polkit' 'dconf')
+optdepends=('hypr-dynamic-cursors: shake the pointer to find it'
+            'hyprglass: refracted glass behind windows'
+            'power-profiles-daemon: power profile switch in the control centre'
+            'variety: rotating wallpapers, the palette follows each one'
+            'satty: annotate a capture'
+            'tesseract: read a region of the screen as text'
+            'wf-recorder: record the screen'
+            'wl-screenrec: record the screen with the GPU encoder'
+            'mpvpaper: video wallpapers'
+            'ffmpeg: palette from a video wallpaper'
+            'btop: system monitor, coloured by the palette'
+            'cava: audio visualiser on the bar'
+            'quickemu: the virtual machines panel')
+makedepends=('git')
+options=(!strip !emptydirs)
+source=("${pkgname}::git+${url}")
+sha256sums=('SKIP')
+
+package() {
+	local _src="${srcdir}/${pkgname}"
+
+	# The edition's skel (~/.config/kiro-hyprland-impasto/, the impasto profile and
+	# palette board in ~/.local/share/impasto/, the wallpaper picker link) and the
+	# shell itself in /etc/xdg/quickshell/impasto. The shell is system-wide so a
+	# package update reaches every user; its state lives in the user's XDG dirs.
+	cp -a "${_src}/etc" "${pkgdir}/"
+
+	install -Dm755 "${_src}/usr/bin/impasto" "${pkgdir}/usr/bin/impasto"
+	install -Dm755 "${_src}/usr/bin/kiro-hyprland-impasto-session" \
+		"${pkgdir}/usr/bin/kiro-hyprland-impasto-session"
+	install -Dm755 "${_src}/usr/bin/kiro-hyprland-impasto-hide-upstream-session" \
+		"${pkgdir}/usr/bin/kiro-hyprland-impasto-hide-upstream-session"
+	install -Dm644 "${_src}/usr/share/wayland-sessions/kiro-hyprland-impasto.desktop" \
+		"${pkgdir}/usr/share/wayland-sessions/kiro-hyprland-impasto.desktop"
+	install -Dm644 "${_src}/usr/share/libalpm/hooks/kiro-hyprland-impasto-hide-upstream-session.hook" \
+		"${pkgdir}/usr/share/libalpm/hooks/kiro-hyprland-impasto-hide-upstream-session.hook"
+	install -Dm644 -t "${pkgdir}/usr/share/fonts/kiro-hyprland-impasto" \
+		"${_src}/usr/share/fonts/kiro-hyprland-impasto/"*
+	install -Dm644 "${_src}/usr/share/icons/hicolor/scalable/apps/impasto-files.svg" \
+		"${pkgdir}/usr/share/icons/hicolor/scalable/apps/impasto-files.svg"
+
+	# Pristine, read-only golden copy of the desktop config at a stable path so
+	# the config can be reset back to Kiro Hyprland Impasto after a user experiments.
+	install -dm755 "${pkgdir}/usr/share/kiro/kiro-hyprland-impasto"
+	cp -a "${_src}/etc/skel/.config/." "${pkgdir}/usr/share/kiro/kiro-hyprland-impasto/"
+
+	# impasto is GPL-3.0 (andreumassanet/impasto); UPSTREAM names the vendored tag.
+	install -dm755 "${pkgdir}${_licensedir}/${pkgname}"
+	install -m644 "${_src}/LICENSE" "${_src}/UPSTREAM" "${pkgdir}${_licensedir}/${pkgname}/"
+}
