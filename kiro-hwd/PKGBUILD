@@ -1,0 +1,22 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=kiro-hwd
+_pkgname=kiro-hwd
+_destname1="/usr"
+_licensedir="/usr/share/kiro/licenses/"
+pkgver=26.11
+pkgrel=01
+pkgdesc="Kiro's own NVIDIA driver picker (PCI ID lists from CachyOS chwd)"
+arch=('any')
+url="https://github.com/kirodubes/${_pkgname}"
+license=('GPL3')
+depends=('python' 'pacman')
+makedepends=('git')
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+source=("${_pkgname}::git+${url}.git")
+sha256sums=('SKIP')
+package() {
+	install -dm755 "${pkgdir}${_licensedir}${_pkgname}"
+	install -m644 "${srcdir}/${_pkgname}/LICENSE" "${pkgdir}${_licensedir}${_pkgname}/LICENSE"
+	cp -r "${srcdir}/${_pkgname}/${_destname1}" "${pkgdir}"
+}
