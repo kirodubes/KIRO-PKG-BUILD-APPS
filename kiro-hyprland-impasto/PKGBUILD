@@ -2,7 +2,7 @@
 pkgname=kiro-hyprland-impasto
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.11
-pkgrel=01
+pkgrel=09
 pkgdesc="Hyprland desktop edition for Kiro (Hyprland + impasto)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland-impasto"
@@ -57,6 +57,9 @@ package() {
 		"${pkgdir}/usr/share/wayland-sessions/kiro-hyprland-impasto.desktop"
 	install -Dm644 "${_src}/usr/share/libalpm/hooks/kiro-hyprland-impasto-hide-upstream-session.hook" \
 		"${pkgdir}/usr/share/libalpm/hooks/kiro-hyprland-impasto-hide-upstream-session.hook"
+	# impasto owns notifications: keep mako (from kiro-wayland-dotfiles) out of this session only.
+	install -Dm644 "${_src}/usr/lib/systemd/user/mako.service.d/kiro-hyprland-impasto.conf" \
+		"${pkgdir}/usr/lib/systemd/user/mako.service.d/kiro-hyprland-impasto.conf"
 	install -Dm644 -t "${pkgdir}/usr/share/fonts/kiro-hyprland-impasto" \
 		"${_src}/usr/share/fonts/kiro-hyprland-impasto/"*
 	install -Dm644 "${_src}/usr/share/icons/hicolor/scalable/apps/impasto-files.svg" \

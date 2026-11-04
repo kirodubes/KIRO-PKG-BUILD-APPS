@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026.11.04
+
+### kiro-hyprland-impasto: install the mako drop-in
+
+**What Changed.** The package installs `/usr/lib/systemd/user/mako.service.d/kiro-hyprland-impasto.conf`, which keeps
+mako from taking impasto's notification service in this edition's session.
+
+**Technical Details.** One `install -Dm644` in `package()`, next to the libalpm hook. The file comes from the source
+repo.
+
+**Files Modified.** `kiro-hyprland-impasto/PKGBUILD`, `CHANGELOG.md`
+
 ## 2026.11.03
 
 ### kiro-wayland-dotfiles: ship kiro-premium-hint and the translations
