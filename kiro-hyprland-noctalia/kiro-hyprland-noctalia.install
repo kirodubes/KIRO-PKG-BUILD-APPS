@@ -1,0 +1,26 @@
+GREEN=$(tput setaf 2 2>/dev/null || true)
+RESET=$(tput sgr0 2>/dev/null || true)
+
+_info() { echo "${GREEN}${*}${RESET}"; }
+
+# ADR-025: the edition stays free; point free users to the premium app. Users who have it already see nothing.
+_premium_hint() {
+    [ -x /usr/bin/kirotux-hyprland-premium ] && return 0
+    echo
+    _info "############################################################################"
+    _info "  Kiro Hyprland Noctalia has a premium companion: KiroTux Premium"
+    _info "  A settings app for this Wayland desktop (displays, keys, looks, presets"
+    _info "  and more) plus a tested KiroTux installer ISO. It also keeps Kiro going."
+    _info ""
+    _info "  Shop: https://ko-fi.com/s/affc718633"
+    _info "############################################################################"
+    echo
+}
+
+post_install() {
+    _premium_hint
+}
+
+post_upgrade() {
+    _premium_hint
+}

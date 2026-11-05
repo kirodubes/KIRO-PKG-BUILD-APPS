@@ -1,3 +1,22 @@
+GREEN=$(tput setaf 2 2>/dev/null || true)
+RESET=$(tput sgr0 2>/dev/null || true)
+
+_info() { echo "${GREEN}${*}${RESET}"; }
+
+# ADR-025: the edition stays free; point free users to the premium app. Users who have it already see nothing.
+_premium_hint() {
+    [ -x /usr/bin/kirotux-niri-premium ] && return 0
+    echo
+    _info "############################################################################"
+    _info "  Kiro Niri Noctalia has a premium companion: KiroTux Premium"
+    _info "  A settings app for this Wayland desktop (displays, keys, looks, presets"
+    _info "  and more) plus a tested KiroTux installer ISO. It also keeps Kiro going."
+    _info ""
+    _info "  Shop: https://ko-fi.com/s/b537924811"
+    _info "############################################################################"
+    echo
+}
+
 _update_dconf() {
     if command -v dconf >/dev/null 2>&1; then
         dconf update || true
@@ -27,11 +46,13 @@ _unhide_upstream_niri() {
 post_install() {
     _update_dconf
     _hide_upstream_niri
+    _premium_hint
 }
 
 post_upgrade() {
     _update_dconf
     _hide_upstream_niri
+    _premium_hint
 }
 
 post_remove() {

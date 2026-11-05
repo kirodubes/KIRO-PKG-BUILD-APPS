@@ -11,6 +11,23 @@ naming KiroTux Premium and the Ko-fi shop link. Silent when `kirotux-hyprland-pr
 
 **Files Modified.** `kiro-hyprland-impasto/PKGBUILD`, `kiro-hyprland-impasto/readme.install`, `CHANGELOG.md`
 
+### The other Ko-fi Wayland editions: the same premium install message
+
+**What Changed.** kiro-hyprland-dms, kiro-hyprland-noctalia, kiro-niri-dms, kiro-niri-noctalia and kiro-wayfire print
+the same green KiroTux Premium box as impasto on install and upgrade, each with its own edition name and Ko-fi link.
+Silent when the matching premium app is installed.
+
+**Technical Details.** `_premium_hint` is added to each `<pkg>.install` and called last in `post_install` and
+`post_upgrade`; the existing dconf and hide-upstream-session steps are unchanged. The skip check is
+`/usr/bin/kirotux-hyprland-premium`, `kirotux-niri-premium` or `kirotux-wayfire-premium`, depending on the
+compositor. kiro-hyprland-noctalia had no install script: new `kiro-hyprland-noctalia.install` plus `install=`.
+pkgrel bumped on all five.
+
+**Files Modified.** `kiro-hyprland-dms/{PKGBUILD,kiro-hyprland-dms.install}`,
+`kiro-hyprland-noctalia/{PKGBUILD,kiro-hyprland-noctalia.install}`, `kiro-niri-dms/{PKGBUILD,kiro-niri-dms.install}`,
+`kiro-niri-noctalia/{PKGBUILD,kiro-niri-noctalia.install}`, `kiro-wayfire/{PKGBUILD,kiro-wayfire.install}`,
+`CHANGELOG.md`
+
 ## 2026.11.04
 
 ### kiro-hyprland-impasto: install the mako drop-in

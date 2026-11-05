@@ -1,8 +1,8 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-hyprland-dms
 _licensedir="/usr/share/kiro/licenses"
-pkgver=26.10
-pkgrel=21
+pkgver=26.11
+pkgrel=03
 pkgdesc="Hyprland desktop edition for Kiro (Hyprland + DankMaterialShell)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland-dms"

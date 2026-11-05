@@ -1,3 +1,22 @@
+GREEN=$(tput setaf 2 2>/dev/null || true)
+RESET=$(tput sgr0 2>/dev/null || true)
+
+_info() { echo "${GREEN}${*}${RESET}"; }
+
+# ADR-025: the edition stays free; point free users to the premium app. Users who have it already see nothing.
+_premium_hint() {
+    [ -x /usr/bin/kirotux-wayfire-premium ] && return 0
+    echo
+    _info "############################################################################"
+    _info "  Kiro Wayfire has a premium companion: KiroTux Premium"
+    _info "  A settings app for this Wayland desktop (displays, keys, looks, presets"
+    _info "  and more) plus a tested KiroTux installer ISO. It also keeps Kiro going."
+    _info ""
+    _info "  Shop: https://ko-fi.com/s/3753d043e6"
+    _info "############################################################################"
+    echo
+}
+
 _hide_upstream_wayfire() {
     # wayfire is usually already installed when kiro-wayfire lands, so the pacman hook (which only fires
     # when wayfire.desktop is in the transaction) will not run — apply the hide directly here.
@@ -22,11 +41,13 @@ _unhide_upstream_wayfire() {
 post_install() {
     _hide_upstream_wayfire
     _move_sddm_last_session
+    _premium_hint
 }
 
 post_upgrade() {
     _hide_upstream_wayfire
     _move_sddm_last_session
+    _premium_hint
 }
 
 post_remove() {
