@@ -4,8 +4,8 @@
 # it into the chroot, so an isolated build sees it without a host-path hack.
 pkgname=hyprland-tweak-tool
 _licensedir="/usr/share/kiro/licenses"
-pkgver=26.07
-pkgrel=02
+pkgver=26.10
+pkgrel=01
 pkgdesc="Hyprland Tweak Tool — GTK4 configuration tool for the KIROTUX Hyprland edition"
 arch=('any')
 url="https://github.com/kirodubes/hyprland-tweak-tool"

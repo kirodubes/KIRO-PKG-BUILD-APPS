@@ -2,7 +2,7 @@
 pkgname=kiro-hlwm
 _licensedir="/usr/share/kiro/licenses/"
 pkgver=26.10
-pkgrel=06
+pkgrel=07
 pkgdesc="The herbstluftwm edition of Kiro — a manual tiling X11 desktop"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hlwm"

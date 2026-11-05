@@ -1,8 +1,8 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-wayland-dotfiles
 _licensedir="/usr/share/kiro/licenses"
-pkgver=26.10
-pkgrel=03
+pkgver=26.11
+pkgrel=01
 pkgdesc="Shared config base + helpers for the Kiro Wayland editions (dconf, mako, hyprlock/hypridle, waybar style, kiro-screenshot)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-wayland-dotfiles"

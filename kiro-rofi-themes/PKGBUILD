@@ -2,7 +2,7 @@
 pkgname=kiro-rofi-themes
 _destname1="/usr/share/rofi/themes/"
 _licensedir="/usr/share/kiro/licenses/"
-pkgver=26.09
+pkgver=26.10
 pkgrel=01
 pkgdesc="Rofi themes created for edu"
 arch=('any')

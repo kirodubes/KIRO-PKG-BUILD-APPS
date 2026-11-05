@@ -1,8 +1,8 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-river
 _licensedir="/usr/share/kiro/licenses"
-pkgver=26.10
-pkgrel=02
+pkgver=26.11
+pkgrel=01
 pkgdesc="river desktop edition for Kiro (river-classic + waybar, dwm-style dynamic tiling, pywal)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-river"

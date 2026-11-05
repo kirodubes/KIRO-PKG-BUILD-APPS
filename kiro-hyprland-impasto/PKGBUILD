@@ -2,7 +2,7 @@
 pkgname=kiro-hyprland-impasto
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.11
-pkgrel=10
+pkgrel=11
 pkgdesc="Hyprland desktop edition for Kiro (Hyprland + impasto)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland-impasto"
