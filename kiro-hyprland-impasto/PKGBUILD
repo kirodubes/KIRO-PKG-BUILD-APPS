@@ -2,7 +2,7 @@
 pkgname=kiro-hyprland-impasto
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.11
-pkgrel=09
+pkgrel=10
 pkgdesc="Hyprland desktop edition for Kiro (Hyprland + impasto)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland-impasto"
@@ -35,6 +35,7 @@ optdepends=('hypr-dynamic-cursors: shake the pointer to find it'
             'cava: audio visualiser on the bar'
             'quickemu: the virtual machines panel')
 makedepends=('git')
+install='readme.install'
 options=(!strip !emptydirs)
 source=("${pkgname}::git+${url}")
 sha256sums=('SKIP')
@@ -53,6 +54,9 @@ package() {
 		"${pkgdir}/usr/bin/kiro-hyprland-impasto-session"
 	install -Dm755 "${_src}/usr/bin/kiro-hyprland-impasto-hide-upstream-session" \
 		"${pkgdir}/usr/bin/kiro-hyprland-impasto-hide-upstream-session"
+	# ADR-025: a one-time KiroTux Premium hint, started by /etc/xdg/autostart (shipped with etc/ above).
+	install -Dm755 "${_src}/usr/bin/kiro-hyprland-impasto-premium-hint" \
+		"${pkgdir}/usr/bin/kiro-hyprland-impasto-premium-hint"
 	install -Dm644 "${_src}/usr/share/wayland-sessions/kiro-hyprland-impasto.desktop" \
 		"${pkgdir}/usr/share/wayland-sessions/kiro-hyprland-impasto.desktop"
 	install -Dm644 "${_src}/usr/share/libalpm/hooks/kiro-hyprland-impasto-hide-upstream-session.hook" \

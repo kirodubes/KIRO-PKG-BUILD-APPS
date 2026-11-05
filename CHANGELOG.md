@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026.11.05
+
+### kiro-hyprland-impasto: install the premium hint
+
+**What Changed.** The package installs `/usr/bin/kiro-hyprland-impasto-premium-hint`, the one-time KiroTux Premium
+note (ADR-025). Its XDG autostart entry ships with `etc/`.
+New `readme.install` (`install=` in the PKGBUILD): on install and on every upgrade pacman prints a green box
+naming KiroTux Premium and the Ko-fi shop link. Silent when `kirotux-hyprland-premium` is installed.
+
+**Files Modified.** `kiro-hyprland-impasto/PKGBUILD`, `kiro-hyprland-impasto/readme.install`, `CHANGELOG.md`
+
 ## 2026.11.04
 
 ### kiro-hyprland-impasto: install the mako drop-in
