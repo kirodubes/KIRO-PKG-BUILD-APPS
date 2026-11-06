@@ -13,7 +13,7 @@ conflicts=('edu-dot-files-git' 'cachyos-hyprland-settings'
 'cachyos-niri-settings' 'cachyos-niri-noctalia' 'cachyos-alacritty-config'
 'cachyos-i3wm-settings' 'cachyos-wayfire-settings')
 replaces=('edu-dot-files-git')
-depends=('bash')
+depends=('bash' 'surfn-kiro-icons-git')  # skel's default icon theme: kiro-skell or a reset copies it into existing homes
 makedepends=('git')
 options=(!strip !emptydirs)
 source=("${pkgname}::git+${url}.git")
