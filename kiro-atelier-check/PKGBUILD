@@ -1,0 +1,23 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+# KA Check — free, read-only check whether a PC can run Kiro Atelier. Public since 2026-11-07 (nemesis_repo).
+# pkgrel continues from the private kirotux-repo builds (last 26.11-30), so installed copies upgrade.
+pkgname=kiro-atelier-check
+pkgver=26.11
+pkgrel=30
+pkgdesc="KA Check — tells whether this PC can run Kiro Atelier (read-only)"
+arch=('any')
+url="https://github.com/kirodubes/kiro-atelier-check"
+license=('LicenseRef-KA-Check')
+# The menu entry opens a window, so GTK 4 is a real dependency; the terminal report needs only python + lspci.
+depends=('python' 'python-gobject' 'gtk4' 'pciutils')
+optdepends=('nvidia-utils: reads the NVIDIA card details (nvidia-smi)')
+makedepends=('git')
+options=(!strip !emptydirs)
+source=("${pkgname}::git+${url}.git")
+sha256sums=('SKIP')
+
+package() {
+	cp -a "${srcdir}/${pkgname}/usr" "${pkgdir}/"
+	find "${pkgdir}" -name __pycache__ -type d -prune -exec rm -rf {} +
+	install -Dm644 "${srcdir}/${pkgname}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

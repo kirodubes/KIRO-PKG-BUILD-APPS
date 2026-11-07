@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026.11.07
+
+### kiro-atelier-check: new recipe (KA Check goes public)
+
+**What Changed.** KA Check, the free "can this PC run Kiro Atelier?" tool, is built here now from
+`kirodubes/kiro-atelier-check` into nemesis_repo. Each build also puts the package and a `.sha256` into the Ko-fi
+folders, for Arch-based systems without nemesis_repo and for Kiro Atelier's donors (KA depends on it).
+
+**Technical Details.** `PKGBUILD` with a `git+` source; pkgrel starts at 30 so the first build (26.11-31) upgrades
+the copies installed from the earlier private builds. `build.sh` = the package template plus `copy_to_kofi()`
+(every `~/Insync/KoFi/*/kiro-atelier-check/`, newest 3 kept); `.custom-build.sh` keeps
+`copy-files-to-all-folders.sh` from overwriting it. Flow `flow-kiro-atelier-check` (generated).
+
+**Files Modified.** `kiro-atelier-check/PKGBUILD`, `kiro-atelier-check/build.sh`, `kiro-atelier-check/.custom-build.sh`
+(new), `CHANGELOG.md`
+
 ## 2026.11.05
 
 ### kiro-hyprland-impasto: install the premium hint
