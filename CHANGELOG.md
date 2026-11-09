@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026.11.09
+
+### kiro-hyprland-caelestia: new recipe (Kiro Hyprland Caelestia edition)
+
+**What Changed.** Recipe for the new edition config `kirodubes/kiro-hyprland-caelestia` (Hyprland + the Caelestia
+shell), built into nemesis_repo like the other Hyprland editions. It needs `caelestia-shell`, `caelestia-cli`,
+`qt6-m3shapes-git` and `ttf-rubik-vf` from KIRO-PKG-BUILD-3PARTY in nemesis_repo first, and the GitHub repo
+(not created yet) before its first build.
+
+**Technical Details.** Copied from `kiro-hyprland-noctalia`: `build.sh` verbatim, PKGBUILD with the edition names, the
+noctalia depends swapped for `caelestia-shell caelestia-cli quickshell cliphist fuzzel polkit-gnome` (Caelestia
+has no polkit agent), and the mako drop-in installed as impasto does. The `.install` premium hint points at the
+KiroTux hub page until the edition's Ko-fi product exists.
+
+**Files Modified.** `kiro-hyprland-caelestia/{PKGBUILD,build.sh,kiro-hyprland-caelestia.install}`, `CHANGELOG.md`
+
 ## 2026.11.07
 
 ### kiro-atelier-check: new recipe (KA Check goes public)

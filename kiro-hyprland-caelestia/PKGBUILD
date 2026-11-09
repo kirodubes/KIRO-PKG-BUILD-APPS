@@ -1,0 +1,64 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+pkgname=kiro-hyprland-caelestia
+_licensedir="/usr/share/kiro/licenses"
+pkgver=26.11
+pkgrel=01
+pkgdesc="Hyprland desktop edition for Kiro (Hyprland + caelestia)"
+arch=('any')
+url="https://github.com/kirodubes/kiro-hyprland-caelestia"
+license=('GPL3')
+# No conflict with the sibling editions: each Kiro edition ships its own config
+# folder (~/.config/kiro-hyprland-caelestia/ here), session entry and wrapper — no
+# shared files — so all can be installed together and picked per-login.
+depends=('hyprland' 'uwsm' 'hyprpicker' 'caelestia-shell' 'caelestia-cli' 'quickshell'
+         'kiro-wayland-dotfiles'
+         'kiro-keybindings' 'xdg-desktop-portal-hyprland'
+         'xdg-user-dirs' 'grim' 'slurp' 'wl-clipboard' 'cliphist' 'fuzzel'
+         'pavucontrol' 'playerctl' 'wireplumber' 'brightnessctl'
+         'polkit' 'polkit-gnome' 'dconf')
+optdepends=('hyprsunset: blue-light filter / night mode'
+            'hyprlock: alternative screen locker (Caelestia locks by default)'
+            'wlogout: graphical logout / power menu')
+makedepends=('git')
+install="${pkgname}.install"
+options=(!strip !emptydirs)
+source=("${pkgname}::git+${url}")
+sha256sums=('SKIP')
+
+package() {
+	local _src="${srcdir}/${pkgname}"
+
+	# Ship this edition's skel tree (kiro-hyprland-caelestia/ + wallpaper) and
+	# ~/.config/caelestia/ (shell.json, cli.json). Caelestia reads that fixed path;
+	# this is the only Caelestia edition, so this package is its one owner.
+	# cp -a preserves modes and hidden entries.
+	# System-wide dconf appearance defaults come from kiro-wayland-dotfiles.
+	cp -a "${_src}/etc" "${pkgdir}/"
+
+	# Own session entry: a wrapper launches Hyprland pointed at this edition's own
+	# config folder (~/.config/kiro-hyprland-caelestia/) via --config and ships as
+	# "Kiro Hyprland Caelestia" — so switching editions never inherits a sibling's
+	# stale ~/.config/hypr/.
+	install -Dm755 "${_src}/usr/bin/kiro-hyprland-caelestia-session" \
+		"${pkgdir}/usr/bin/kiro-hyprland-caelestia-session"
+	install -Dm755 "${_src}/usr/bin/kiro-hyprland-caelestia-hide-upstream-session" \
+		"${pkgdir}/usr/bin/kiro-hyprland-caelestia-hide-upstream-session"
+	install -Dm644 "${_src}/usr/share/wayland-sessions/kiro-hyprland-caelestia.desktop" \
+		"${pkgdir}/usr/share/wayland-sessions/kiro-hyprland-caelestia.desktop"
+	install -Dm644 "${_src}/usr/share/libalpm/hooks/kiro-hyprland-caelestia-hide-upstream-session.hook" \
+		"${pkgdir}/usr/share/libalpm/hooks/kiro-hyprland-caelestia-hide-upstream-session.hook"
+
+	# Caelestia owns notifications: keep mako (from kiro-wayland-dotfiles) out of this session only.
+	install -Dm644 "${_src}/usr/lib/systemd/user/mako.service.d/kiro-hyprland-caelestia.conf" \
+		"${pkgdir}/usr/lib/systemd/user/mako.service.d/kiro-hyprland-caelestia.conf"
+
+	# Pristine, read-only golden copy of the desktop config at a stable path so
+	# the config can be reset back to Kiro Hyprland Caelestia after a user experiments.
+	install -dm755 "${pkgdir}/usr/share/kiro/kiro-hyprland-caelestia"
+	cp -a "${_src}/etc/skel/.config/." "${pkgdir}/usr/share/kiro/kiro-hyprland-caelestia/"
+
+	if [[ -f "${_src}/LICENSE" ]]; then
+		install -dm755 "${pkgdir}${_licensedir}/${pkgname}"
+		install -m644 "${_src}/LICENSE" "${pkgdir}${_licensedir}/${pkgname}/"
+	fi
+}
