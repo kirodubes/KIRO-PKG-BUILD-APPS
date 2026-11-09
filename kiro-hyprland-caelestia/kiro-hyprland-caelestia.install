@@ -12,7 +12,7 @@ _premium_hint() {
     _info "  A settings app for this Wayland desktop (displays, keys, looks, presets"
     _info "  and more) plus a tested KiroTux installer ISO. It also keeps Kiro going."
     _info ""
-    _info "  More: https://kiroproject.be/kirotux.html"
+    _info "  Shop: https://ko-fi.com/s/90ab737444"
     _info "############################################################################"
     echo
 }
