@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026.11.13
+
+### kiro-wayland-dotfiles: depends on surfn-kiro-icons-git
+
+**What Changed.** The package's dconf and GTK3 defaults now name the Surfn Kiro icon theme, so it depends on
+`surfn-kiro-icons-git`; without it, users who never chose an icon theme would get blank icons.
+
+**Files Modified.** `kiro-wayland-dotfiles/PKGBUILD`, `CHANGELOG.md`
+
 ## 2026.11.09
 
 ### kiro-hyprland-caelestia: new recipe (Kiro Hyprland Caelestia edition)

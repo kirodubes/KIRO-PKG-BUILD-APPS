@@ -10,9 +10,10 @@ license=('GPL3')
 # The binaries it configures. NOT waybar — so dwl (dwlb, no waybar) can depend on
 # this for mako/hypr without pulling waybar; the waybar editions list waybar themselves.
 # 'dconf' is required so the post_install scriptlet can compile the shipped dconf defaults.
+# surfn-kiro-icons-git: the dconf and GTK3 defaults name Surfn-Kiro, so it must be installed (else blank icons).
 # grim/slurp/wl-clipboard/libnotify are what /usr/bin/kiro-screenshot actually runs; the
 # editions list grim themselves too, but the package shipping the script owns its runtime deps.
-depends=('mako' 'hyprlock' 'hypridle' 'dconf'
+depends=('mako' 'hyprlock' 'hypridle' 'dconf' 'surfn-kiro-icons-git'
          'grim' 'slurp' 'wl-clipboard' 'libnotify')
 makedepends=('git')
 options=(!strip !emptydirs)
