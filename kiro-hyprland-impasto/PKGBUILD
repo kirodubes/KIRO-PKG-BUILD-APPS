@@ -2,7 +2,7 @@
 pkgname=kiro-hyprland-impasto
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.11
-pkgrel=11
+pkgrel=12
 pkgdesc="Hyprland desktop edition for Kiro (Hyprland + impasto)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland-impasto"
@@ -33,7 +33,11 @@ optdepends=('hypr-dynamic-cursors: shake the pointer to find it'
             'ffmpeg: palette from a video wallpaper'
             'btop: system monitor, coloured by the palette'
             'cava: audio visualiser on the bar'
-            'quickemu: the virtual machines panel')
+            'quickemu: the virtual machines panel'
+            'songrec: the Song tile, naming what is playing'
+            'khal: calendar events from a synced calendar'
+            'python-recurring-ical-events: calendar events from a link, repeating ones included'
+            'breeze-icons: the weather in full colour')
 makedepends=('git')
 install='readme.install'
 options=(!strip !emptydirs)
