@@ -1,0 +1,18 @@
+# Maintainer: Erik Dubois <erik.dubois@gmail.com>
+# Wallpapers painted by Kiro Atelier — one picture in 22 styles, to show what KA does.
+pkgname=kiro-atelier-wallpapers
+pkgver=26.11
+pkgrel=01
+pkgdesc="Wallpapers painted by Kiro Atelier — one picture in 22 styles"
+arch=('any')
+url="https://github.com/kirodubes/kiro-atelier-wallpapers"
+license=('LicenseRef-kiro-atelier-wallpapers')
+makedepends=('git')
+options=(!strip !emptydirs)
+source=("${pkgname}::git+${url}.git")
+sha256sums=('SKIP')
+
+package() {
+	cp -a "${srcdir}/${pkgname}/usr" "${pkgdir}/"
+	install -Dm644 "${srcdir}/${pkgname}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
