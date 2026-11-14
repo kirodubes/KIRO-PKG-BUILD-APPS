@@ -2,7 +2,7 @@
 pkgname=kiro-hyprland-impasto
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.11
-pkgrel=12
+pkgrel=13
 pkgdesc="Hyprland desktop edition for Kiro (Hyprland + impasto)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland-impasto"
@@ -37,7 +37,8 @@ optdepends=('hypr-dynamic-cursors: shake the pointer to find it'
             'songrec: the Song tile, naming what is playing'
             'khal: calendar events from a synced calendar'
             'python-recurring-ical-events: calendar events from a link, repeating ones included'
-            'breeze-icons: the weather in full colour')
+            'breeze-icons: the weather in full colour'
+            'ydotool: the on-screen keyboard')
 makedepends=('git')
 install='readme.install'
 options=(!strip !emptydirs)
