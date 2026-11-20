@@ -5,14 +5,16 @@ _destname1="/usr"
 _licensedir="/usr/share/kiro/licenses/"
 pkgver=26.10
 pkgrel=11
-pkgdesc="Ohmychadwm Tweak Tool — look, bar, wallpaper, displays, mouse, startup apps, default apps and keys for ohmychadwm"
+pkgdesc="Ohmychadwm Tweak Tool — look, bar, wallpaper, displays, mouse, startup apps, default apps, keys, keyboard and updates for ohmychadwm"
 arch=('any')
 url="https://github.com/kirodubes/${_pkgname}"
 license=('GPL3')
-depends=('ohmychadwm' 'python-gobject' 'gtk4' 'xfconf' 'polkit' 'arandr' 'xorg-xinput' 'feh' 'xdg-utils')
+depends=('ohmychadwm' 'python-gobject' 'gtk4' 'xfconf' 'polkit' 'arandr' 'xorg-xinput' 'xorg-setxkbmap' 'feh' 'xdg-utils')
 optdepends=('xdotool: restart ohmychadwm from the app after a bar change'
             'xorg-xrdb: apply the cursor to ~/.Xresources live'
-            'variety: the Variety wallpaper sources and Previous/Next')
+            'variety: the Variety wallpaper sources and Previous/Next'
+            'pacman-contrib: list waiting updates on the Update & News page (checkupdates)'
+            'kiro-news: the Kiro News on the Update & News page')
 makedepends=('git')
 # Replaces Ohmychadwm Appearance: pacman -Syu offers the swap, and provides keeps ohmychadwm's old dependency met
 provides=('ohmychadwm-appearance')

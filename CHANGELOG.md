@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026.11.20
+
+### ohmychadwm-tweak-tool: dependencies for the Keyboard and Update & News pages
+
+**What Changed.** The app gained a Keyboard page and an Update & News page. `xorg-setxkbmap` is now a dependency
+(the Keyboard page switches the layout with it); `pacman-contrib` (checkupdates) and `kiro-news` are optional, for the
+list of waiting updates and the news. The description names the new pages.
+
+**Technical Details.** Only the dependency lines and `pkgdesc` were committed; the 26.11-05 version bump already in the
+working tree (and `.current-version` / `.previous-version`) stays as the flow left it.
+
+**Files Modified.** `ohmychadwm-tweak-tool/PKGBUILD`
+
 ## 2026.11.13
 
 ### kiro-wayland-dotfiles: depends on surfn-kiro-icons-git
