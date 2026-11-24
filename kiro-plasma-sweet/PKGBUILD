@@ -1,6 +1,6 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-plasma-sweet
-pkgver=26.09
+pkgver=26.11
 pkgrel=01
 pkgdesc="Sweet Plasma global theme (desktoptheme, look-and-feel, aurorae, color scheme, Kvantum, SDDM) with Kiro neo-candy icons"
 arch=('any')

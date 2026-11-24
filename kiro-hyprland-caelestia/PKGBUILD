@@ -2,7 +2,7 @@
 pkgname=kiro-hyprland-caelestia
 _licensedir="/usr/share/kiro/licenses"
 pkgver=26.11
-pkgrel=01
+pkgrel=06
 pkgdesc="Hyprland desktop edition for Kiro (Hyprland + caelestia)"
 arch=('any')
 url="https://github.com/kirodubes/kiro-hyprland-caelestia"

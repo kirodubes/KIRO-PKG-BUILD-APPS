@@ -1,6 +1,6 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-plasma-whitesur
-pkgver=26.09
+pkgver=26.11
 pkgrel=01
 pkgdesc="WhiteSur (macOS-style) Plasma global theme — WhiteSur + Alt (desktoptheme, look-and-feel, aurorae, color schemes, Kvantum, SDDM, WhiteSur cursors); bundles renamed WhiteSur icons"
 arch=('any')

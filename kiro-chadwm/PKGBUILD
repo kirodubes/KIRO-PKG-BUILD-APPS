@@ -6,7 +6,7 @@ _destname2="/etc/skel/.bin/"
 _destname5="/usr/"
 _licensedir="/usr/share/kiro/licenses/"
 pkgver=26.11
-pkgrel=01
+pkgrel=02
 pkgdesc="Desktop configuration for Kiro"
 arch=('any')
 url="https://github.com/kirodubes/kiro-chadwm"
@@ -44,6 +44,7 @@ depends=(
 
 optdepends=(
   'fastcompmgr-git: compositor for transparency and effects'
+  'snixembed: shows the volctl tray icon in the chadwm systray (autostarted)'
 )
 provides=("${pkgname}")
 conflicts=('edu-chadwm-git')

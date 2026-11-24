@@ -8,7 +8,7 @@ _destname2="/etc/skel/.bin/"
 _destname5="/usr/"
 _licensedir="/usr/share/edu/licenses/"
 pkgver=26.11
-pkgrel=17
+pkgrel=28
 pkgdesc="Configuration files"
 arch=('any')
 url="https://github.com/kirodubes/ohmychadwm"
@@ -61,6 +61,7 @@ optdepends=(
   'xfce4-notifyd: desktop notifications (autostarted)'
   'polkit-gnome: graphical password prompts (autostarted)'
   'volctl: volume tray icon (autostarted)'
+  'snixembed: shows the volctl tray icon in the chadwm systray (autostarted)'
   'blueberry: Bluetooth tray (autostarted)'
   'pamac-aur: update tray and package manager (autostarted)'
   'numlockx: numlock on at login (autostarted)'

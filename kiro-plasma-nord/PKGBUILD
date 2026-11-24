@@ -1,6 +1,6 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
 pkgname=kiro-plasma-nord
-pkgver=26.09
+pkgver=26.11
 pkgrel=01
 pkgdesc="Nord Plasma global theme (Kiro-Nordic): desktoptheme, look-and-feel, aurorae, colour schemes (incl. Kiro-Nordic-Darker), Kvantum, SDDM; Surfn-Plasma-Dark-Qogir icons + Nord cursors"
 arch=('any')
