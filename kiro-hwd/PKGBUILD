@@ -13,6 +13,7 @@ depends=('python' 'pacman')
 makedepends=('git')
 provides=("${pkgname}")
 options=(!strip !emptydirs)
+install=kiro-hwd.install
 source=("${_pkgname}::git+${url}.git")
 sha256sums=('SKIP')
 package() {
