@@ -11,9 +11,8 @@ url="https://github.com/kirodubes/kiro-system-files"
 license=('GPL3')
 conflicts=('edu-system-files-git')
 replaces=('edu-system-files-git')
-depends=('bash' 'kiro-news' 'kiro-keyring' 'kiro-mirrorlist' 'jq')
-optdepends=('wl-clipboard: --copy on Wayland'
-            'cachyos-pi-scan: kiro-aur-check, the AUR check paru runs before a build')
+depends=('bash' 'kiro-news' 'kiro-keyring' 'kiro-mirrorlist' 'jq' 'cachyos-pi-scan')
+optdepends=('wl-clipboard: --copy on Wayland')
 makedepends=('git')
 options=(!strip !emptydirs)
 source=("${pkgname}::git+${url}.git")

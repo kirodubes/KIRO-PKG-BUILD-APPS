@@ -3,12 +3,16 @@
 ## 2026.11.26
 
 ### What Changed
-- **kiro-system-files:** `optdepends` gains `cachyos-pi-scan` — the scanner behind the new `kiro-aur-check`, the
-  AUR check paru runs before a build. Optional: without it the check prints one line and the build goes on.
+- **kiro-system-files:** `cachyos-pi-scan` is now a dependency — the scanner behind the new `kiro-aur-check`, the
+  AUR check paru runs before a build. First an optdepends; moved to `depends` the same day (Erik) because the
+  check is on by default and optdepends never installs it, so existing users who update would get the check
+  switched on with no scanner behind it.
 
 ### Technical Details
 - `cachyos-pi-scan` is a new nemesis package from KIRO-PKG-BUILD-3PARTY (CachyOS Package Installer's scan
-  command, built from upstream source). pkgrel left to the flow.
+  command, built from upstream source). pkgrel left to the flow. Every Kiro install already has `qt6-base`, the
+  scanner's only heavy runtime dependency. A system with CachyOS's `cachyos-packageinstaller` gets a conflict
+  prompt: that package ships the same `/usr/bin/cachyos-pi-scan` but does not provide `cachyos-pi-scan`.
 
 ### Files Modified
 - `kiro-system-files/PKGBUILD`
