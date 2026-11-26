@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026.11.26
+
+### What Changed
+- **kiro-system-files:** `optdepends` gains `cachyos-pi-scan` — the scanner behind the new `kiro-aur-check`, the
+  AUR check paru runs before a build. Optional: without it the check prints one line and the build goes on.
+
+### Technical Details
+- `cachyos-pi-scan` is a new nemesis package from KIRO-PKG-BUILD-3PARTY (CachyOS Package Installer's scan
+  command, built from upstream source). pkgrel left to the flow.
+
+### Files Modified
+- `kiro-system-files/PKGBUILD`
+
 ## 2026.11.20
 
 ### ohmychadwm-tweak-tool: dependencies for the Keyboard and Update & News pages
