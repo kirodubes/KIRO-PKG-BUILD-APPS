@@ -4,13 +4,13 @@ _pkgname=ohmychadwm-tweak-tool
 _destname1="/usr"
 _licensedir="/usr/share/kiro/licenses/"
 pkgver=26.11
-pkgrel=20
+pkgrel=27
 pkgdesc="Ohmychadwm Tweak Tool — look, bar, wallpaper, displays, mouse, startup apps, default apps, keys, keyboard and updates for ohmychadwm"
 arch=('any')
 url="https://github.com/kirodubes/${_pkgname}"
 license=('GPL3')
 depends=('ohmychadwm' 'python-gobject' 'gtk4' 'xfconf' 'polkit' 'arandr' 'xorg-xinput' 'xorg-setxkbmap' 'feh' 'xdg-utils'
-         'xdotool' 'xorg-xprop')
+         'xdotool' 'xorg-xprop' 'xorg-xset')
 optdepends=('xorg-xrdb: apply the cursor to ~/.Xresources live'
             'variety: the Variety wallpaper sources and Previous/Next'
             'pacman-contrib: list waiting updates on the Update & News page (checkupdates)'
