@@ -7,13 +7,19 @@
   NVIDIA 620 get the fix for the Wayland login black screen with two or more screens (NVIDIA bug 7126445) with this
   kiro-hwd update, instead of only on their next driver change.
 
+- **kiro-hwd-nemesis (new):** the testing twin of kiro-hwd for kiro-iso-next, so kiro-hwd changes no longer go
+  straight to every user. Same files, built from `kirodubes/kiro-hwd-nemesis`.
+
 ### Technical Details
 - `kiro-hwd/kiro-hwd.install`: new `post_install` (flip-fix only); `post_upgrade` runs `power` and then `flip-fix`.
   flip-fix only reads the installed nvidia-utils version, so unlike `power` it is safe in the ISO build chroot.
   Without `--no-initramfs` here: when nvidia is in the initramfs, the scriptlet is the one place that must rebuild it.
 
+- `kiro-hwd-nemesis/PKGBUILD`: `provides=('kiro-hwd')`, `conflicts=('kiro-hwd')`, same `kiro-hwd.install` and
+  `build.sh`; `kiro-hwd/PKGBUILD` gets `conflicts=('kiro-hwd-nemesis')`, the same pairing as kiro-bootloader-grub.
+
 ### Files Modified
-- `kiro-hwd/kiro-hwd.install`, `CHANGELOG.md`
+- `kiro-hwd/kiro-hwd.install`, `kiro-hwd/PKGBUILD`, `kiro-hwd-nemesis/` (new), `CHANGELOG.md`
 
 ## 2026.11.26
 

@@ -1,0 +1,12 @@
+# power: upgrade only. post_install also runs in the ISO build chroot, where sysfs is the build host's hardware;
+# the installer runs "kiro-hwd install" on the target, which writes the same file.
+# flip-fix: install and upgrade. It only reads the installed nvidia-utils version, so the chroot is fine, and a
+# system already on NVIDIA 620 gets the option with this kiro-hwd update (the pacman hook covers later driver changes).
+post_install() {
+    kiro-hwd flip-fix || true
+}
+
+post_upgrade() {
+    kiro-hwd power || true
+    kiro-hwd flip-fix || true
+}
