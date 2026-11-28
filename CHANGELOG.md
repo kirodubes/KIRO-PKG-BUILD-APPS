@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026.11.28
+
+### What Changed
+- **kiro-hwd:** the install scriptlet also runs `kiro-hwd flip-fix`, on install and on upgrade. Systems already on
+  NVIDIA 620 get the fix for the Wayland login black screen with two or more screens (NVIDIA bug 7126445) with this
+  kiro-hwd update, instead of only on their next driver change.
+
+### Technical Details
+- `kiro-hwd/kiro-hwd.install`: new `post_install` (flip-fix only); `post_upgrade` runs `power` and then `flip-fix`.
+  flip-fix only reads the installed nvidia-utils version, so unlike `power` it is safe in the ISO build chroot.
+  Without `--no-initramfs` here: when nvidia is in the initramfs, the scriptlet is the one place that must rebuild it.
+
+### Files Modified
+- `kiro-hwd/kiro-hwd.install`, `CHANGELOG.md`
+
 ## 2026.11.26
 
 ### What Changed
