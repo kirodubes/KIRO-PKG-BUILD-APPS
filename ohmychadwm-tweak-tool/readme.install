@@ -1,4 +1,16 @@
+_move_sddm_backups() {
+    # SDDM reads every file in sddm.conf.d, so an old .oma-bak there overrode the real conf (autologin session, theme)
+    local f dest=/var/lib/ohmychadwm-tweak-tool/etc/sddm.conf.d
+    for f in /etc/sddm.conf.d/*.oma-bak; do
+        [[ -f "$f" ]] || continue
+        mkdir -p "$dest"
+        mv -f "$f" "$dest/"
+        echo "** Moved the backup ${f} to ${dest}/"
+    done
+}
+
 post_install() {
+    _move_sddm_backups
     echo -e "\n** Ohmychadwm Tweak Tool installed"
     echo -e "** Launch it from your menu or run: ohmychadwm-tweak-tool (short: ott, or the old oma)"
     echo -e "** Look, bar & windows, wallpaper, displays, mouse & touchpad, startup apps, default apps and keys"
